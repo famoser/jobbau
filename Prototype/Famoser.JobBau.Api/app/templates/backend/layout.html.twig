@@ -5,51 +5,62 @@
     <meta name="description" content="JobBau: build your career!">
     <meta name="author" content="Florian Moser">
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    <!--[if lte IE 8]><script src="/assets/js/html5shiv.js"></script><![endif]-->
-    <link rel="stylesheet" href="/assets/css/main.css" />
-    <!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
-    <!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
-    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+    <!--[if lte IE 8]>
+    <script src="/assets/js/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="/assets/css/main.css"/>
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="/assets/css/ie9.css"/><![endif]-->
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="/assets/css/ie8.css"/><![endif]-->
+    <noscript>
+        <link rel="stylesheet" href="/assets/css/noscript.css"/>
+    </noscript>
 
+    <link rel="stylesheet" href="/css/styles.css"/>
 
-
-    <title>LastPass - a password manager</title>
+    <title>JobBau: build your career!</title>
 </head>
 <body class="is-loading">
 
 <!-- Wrapper -->
-<div id="wrapper">
+<div class="admin-wrapper">
 
-    <!-- Main -->
-    <section id="main">
-  {% block content %} {% endblock %}
+    <section id="content">
+        {% block content %} {% endblock %}
     </section>
-
-    <!-- Footer -->
-    <footer id="footer">
-        <ul class="copyright">
-            <li>&copy; JobBau @ Florian Moser</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-        </ul>
-    </footer>
 
 </div>
 
+<!-- Footer -->
+<footer id="footer">
+    <ul class="copyright">
+        <li>&copy; JobBau @ Florian Moser</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+    </ul>
+</footer>
+
 <!-- Scripts --><!-- Latest compiled and minified JavaScript -->
-<!--[if lte IE 8]><script src="/assets/js/respond.min.js"></script><![endif]-->
+<!--[if lte IE 8]>
+<script src="/assets/js/respond.min.js"></script><![endif]-->
 <script src="/assets/js/jquery-3.0.0.min.js"></script>
 <script src="/assets/js/isotope.min.js"></script>
 <script src="/assets/js/respond.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
 
 
 <script>
     if ('addEventListener' in window) {
-        window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
+        window.addEventListener('load', function () {
+            document.body.className = document.body.className.replace(/\bis-loading\b/, '');
+        });
         document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
     }
 </script>

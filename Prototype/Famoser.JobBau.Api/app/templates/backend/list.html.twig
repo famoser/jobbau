@@ -1,56 +1,54 @@
-{% extends "layout.html.twig" %}
+{% extends "backend/layout.html.twig" %}
 
 {% block content %}
-    <div class="container">
-        <div class="col-md-10">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Beruf</th>
-                    <th>Ausbildung</th>
-                    <th>Verfügbarkeit</th>
+    <div class="col-md-10">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Beruf</th>
+                <th>Ausbildung</th>
+                <th>Verfügbarkeit</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for person in persons %}
+                <tr class="{{ person.getSortClasses }}">
+                    <td>{{ person.getName }}</td>
+                    <td>{{ person.getProfessions }}</td>
+                    <td>{{ person.getAvailability }}</td>
                 </tr>
-                </thead>
-                <tbody>
-                {% for person in persons %}
-                    <tr class="{{ person.getSortClasses }}">
-                        <td>{{ person.getName }}</td>
-                        <td>{{ person.getProfessions }}</td>
-                        <td>{{ person.getAvailability }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-2">
-            <h3>1. Filter Beruf</h3>
-            <ul>
-                {% for profession in professions %}
-                    <li>
-                        <button class="button"
-                                data-filter="{{ profession.getSortClass }}">{{ profession.getName }}</button>
-                    </li>
-                {% endfor %}
-            </ul>
-            <hr/>
-            <h3>2. Filter Ausbildung</h3>
-            <ul>
-                {% for training in trainings %}
-                    <li>
-                        <button class="button" data-filter="{{ training.getSortClass }}">{{ training.getName }}</button>
-                    </li>
-                {% endfor %}
-            </ul>
-            <hr/>
-            <h3>3. Filter Skills</h3>
-            <ul>
-                {% for skill in skills %}
-                    <li>
-                        <button class="button" data-filter="{{ skill.getSortClass }}">{{ skill.getName }}</button>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-2">
+        <h3>1. Filter Beruf</h3>
+        <ul>
+            {% for profession in professions %}
+                <li>
+                    <button class="button"
+                            data-filter="{{ profession.getSortClass }}">{{ profession.getName }}</button>
+                </li>
+            {% endfor %}
+        </ul>
+        <hr/>
+        <h3>2. Filter Ausbildung</h3>
+        <ul>
+            {% for training in trainings %}
+                <li>
+                    <button class="button" data-filter="{{ training.getSortClass }}">{{ training.getName }}</button>
+                </li>
+            {% endfor %}
+        </ul>
+        <hr/>
+        <h3>3. Filter Skills</h3>
+        <ul>
+            {% for skill in skills %}
+                <li>
+                    <button class="button" data-filter="{{ skill.getSortClass }}">{{ skill.getName }}</button>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}

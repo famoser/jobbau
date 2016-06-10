@@ -1,4 +1,24 @@
-body {
-    height: 100%;
+body, html {
+    min-height: 100%;
     width: 100%;
+}
+
+#content:after {
+    content: ".";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0;
+}
+
+.admin-wrapper {
+    background-color: rgba(255, 255, 255, 08);
+    min-height: 100%;
+    margin: 20px;
+    border-radius: 10px;
+    padding: 40px;
+}
+
+#footer {
+    padding: 1.5em 0 2em 0;
 }
