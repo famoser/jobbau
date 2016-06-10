@@ -15,8 +15,17 @@ use Famoser\MassPass\Helpers\ResponseHelper;
 use Famoser\MassPass\Models\Entities\Availability;
 use Famoser\MassPass\Models\Entities\Person;
 use Famoser\MassPass\Models\Entities\ProfessionInfo;
+use Famoser\MassPass\Models\Entities\Professions;
 use Famoser\MassPass\Models\Entities\SkillInfo;
+use Famoser\MassPass\Models\Entities\Skills;
+use Famoser\MassPass\Models\Entities\Trainings;
 use Famoser\MassPass\Models\Response\SubmitResponse;
+use Famoser\MassPass\Models\View\PersonViewModel;
+use Famoser\MassPass\Models\View\ProfessionInfoViewModel;
+use Famoser\MassPass\Models\View\ProfessionViewModel;
+use Famoser\MassPass\Models\View\SkillInfoViewModel;
+use Famoser\MassPass\Models\View\SkillViewModel;
+use Famoser\MassPass\Models\View\TrainingViewModel;
 use Famoser\MassPass\Types\ApiErrorTypes;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -37,7 +46,7 @@ class PrototypeController extends BaseController
 
             //save file
             $storage = new FileSystem($this->getUserDirForContent($model->Person->guid));
-            $file = new File('updateFile', $storage);
+            $file = new File('imageFile', $storage);
             $file->setName($model->Person->guid);
             $file->upload();
 
@@ -104,6 +113,52 @@ class PrototypeController extends BaseController
         } else {
             return $this->returnApiError(ApiErrorTypes::NotAuthorized, $response);
         }
+    }
+
+    public function entries(Request $request, Response $response, $args)
+    {
+        $helper = $this->getDatabaseHelper();
+
+        $skills = $helper->getFromDatabase(new Skills());
+        $skillsVm = array();
+        foreach ($skills as $skill) {
+            $skillsVm[] = new SkillViewModel($skill);
+        }
+        $args["skills"] = $skillsVm;
+
+        $professions = $helper->getFromDatabase(new Professions());
+        $prefessionsVm = array();
+        foreach ($professions as $profession) {
+            $prefessionsVm[] = new ProfessionViewModel($profession);
+        }
+        $args["professions"] = $prefessionsVm;
+
+        $trainings = $helper->getFromDatabase(new Trainings());
+        $trainingsVm = array();
+        foreach ($trainings as $training) {
+            $trainingsVm[] = new TrainingViewModel($training);
+        }
+        $args["trainings"] = $trainingsVm;
+
+        $persons = $helper->getFromDatabase(new Person());
+        $personViewModels = array();
+        foreach ($persons as $person) {
+            $availablities = $helper->getFromDatabase(new Availability(), "person_id=:id", array("id" => $person->id));
+            $professionInfos = $helper->getFromDatabase(new ProfessionInfo(), "person_id=:id", array("id" => $person->id));
+            $professionsVm = array();
+            foreach ($professionInfos as $profs) {
+                $professionsVm[] = new ProfessionInfoViewModel($profs, $professions, $trainings);
+            }
+            $skillInfos = $helper->getFromDatabase(new SkillInfo(), "person_id=:id", array("id" => $person->id));
+            $skillInfosVm = array();
+            foreach ($skillInfos as $skill) {
+                $skillInfosVm[] = new SkillInfoViewModel($skill, $skills);
+            }
+            $personViewModels[] = new PersonViewModel($person, $professionsVm, $skillInfosVm, $availablities);
+        }
+        $args["persons"] = $personViewModels;
+
+        return $this->renderTemplate($response, "backend/list", $args);
     }
 
     private function getUserDirForContent($userGuid)

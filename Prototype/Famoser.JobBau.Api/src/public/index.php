@@ -105,6 +105,7 @@ $app->add(new LoggingMiddleware($c));
 
 $routes = function () use ($controllerNamespace) {
     $this->post('/submit', $controllerNamespace . 'PrototypeController:submit');
+    $this->get('/entries', $controllerNamespace . 'PrototypeController:entries');
 };
 
 
@@ -112,6 +113,5 @@ $app->group("/tests/1.0", $routes);
 $app->group("/1.0", $routes);
 
 $app->get("/1.0/", $controllerNamespace . 'PublicController:index');
-$app->post("/1.0/", $controllerNamespace . 'PublicController:indexAsJson');
 
 $app->run();

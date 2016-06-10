@@ -9,12 +9,15 @@
 namespace Famoser\MassPass\Helpers;
 
 
+use Famoser\MassPass\Models\Entities\Availability;
 use Famoser\MassPass\Models\Entities\Person;
 use Famoser\MassPass\Models\Entities\Base\BaseEntity;
 use Famoser\MassPass\Models\Entities\PersonMetaData;
 use Famoser\MassPass\Models\Entities\ProfessionInfo;
 use Famoser\MassPass\Models\Entities\Professions;
 use Famoser\MassPass\Models\Entities\SkillInfo;
+use Famoser\MassPass\Models\Entities\Skills;
+use Famoser\MassPass\Models\Entities\Trainings;
 use Interop\Container\ContainerInterface;
 use PDO;
 use Slim\Container;
@@ -136,7 +139,7 @@ class DatabaseHelper
      * @param null $parameters
      * @param null $orderBy
      * @param int $limit
-     * @return Person[]|PersonMetaData[]|ProfessionInfo[]|Professions[]|SkillInfo[]|bool
+     * @return Availability[]|Person[]|PersonMetaData[]|ProfessionInfo[]|Professions[]|SkillInfo[]|Skills[]|Trainings[]|bool
      */
     public function getFromDatabase(BaseEntity $entity, $where = null, $parameters = null, $orderBy = null, $limit = 1000)
     {
@@ -154,7 +157,7 @@ class DatabaseHelper
      * @param null $parameters
      * @param null $orderBy
      * @param int $limit
-     * @return Person[]|PersonMetaData[]|ProfessionInfo[]|Professions[]|SkillInfo[]|bool
+     * @return Availability[]|Person[]|PersonMetaData[]|ProfessionInfo[]|Professions[]|SkillInfo[]|Skills[]|Trainings[]|bool
      */
     public function getWithInFromDatabase(BaseEntity $entity, $property, $values, $invertIn = false, $where = null, $parameters = null, $orderBy = null, $limit = 1000)
     {
@@ -181,7 +184,7 @@ class DatabaseHelper
      * @param null $parameters
      * @param null $orderBy
      * @param int $limit
-     * @return Person|PersonMetaData|Professions|ProfessionInfo|SkillInfo|bool
+     * @return Availability|Person|PersonMetaData|ProfessionInfo|Professions|SkillInfo|Skills|Trainings|bool
      */
     public function getSingleFromDatabase(BaseEntity $entity, $where = null, $parameters = null, $orderBy = null, $limit = 1000)
     {
