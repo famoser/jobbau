@@ -104,24 +104,7 @@ $app->add(new TestsMiddleware($c));
 $app->add(new LoggingMiddleware($c));
 
 $routes = function () use ($controllerNamespace) {
-    $this->group("/authorization", function () use ($controllerNamespace) {
-        $this->post('/authorize', $controllerNamespace . 'AuthorizationController:authorize');
-        $this->post('/status', $controllerNamespace . 'AuthorizationController:status');
-        $this->post('/createauthorization', $controllerNamespace . 'AuthorizationController:createAuthorization');
-        $this->post('/unauthorize', $controllerNamespace . 'AuthorizationController:unAuthorize');
-        $this->post('/authorizeddevices', $controllerNamespace . 'AuthorizationController:authorizedDevices');
-    });
-    $this->group("/actions", function () use ($controllerNamespace) {
-        $this->get('/cleanup', $controllerNamespace . 'ActionsController:cleanup');
-        $this->get('/setup', $controllerNamespace . 'ActionsController:setup');
-    });
-    $this->group("/sync", function () use ($controllerNamespace) {
-        $this->post('/refresh', $controllerNamespace . 'SyncController:refresh');
-        $this->post('/update', $controllerNamespace . 'SyncController:update');
-        $this->post('/readcontententity', $controllerNamespace . 'SyncController:readContentEntity');
-        $this->post('/readcollectionentries', $controllerNamespace . 'SyncController:readCollectionEntries');
-        $this->post('/gethistory', $controllerNamespace . 'SyncController:getHistory');
-    });
+    $this->post('/submit', $controllerNamespace . 'PrototypeController:submit');
 };
 
 

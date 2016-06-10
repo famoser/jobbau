@@ -11,6 +11,7 @@ use Famoser\MassPass\Models\Request\CollectionEntriesRequest;
 use Famoser\MassPass\Models\Request\ContentEntityHistoryRequest;
 use Famoser\MassPass\Models\Request\ContentEntityRequest;
 use Famoser\MassPass\Models\Request\RefreshRequest;
+use Famoser\MassPass\Models\Request\SubmitRequest;
 use Famoser\MassPass\Models\Request\UpdateRequest;
 use Famoser\MassPass\Models\Response\Authorization\AuthorizedDevicesResponse;
 use JsonMapper;
@@ -26,102 +27,12 @@ class RequestHelper
 {
     /**
      * @param Request $request
-     * @return AuthorizationRequest
+     * @return SubmitRequest
      * @throws \JsonMapper_Exception
      */
-    public static function parseAuthorisationRequest(Request $request)
+    public static function parseSubmitRequest(Request $request)
     {
-        return RequestHelper::executeJsonMapper($request, new AuthorizationRequest());
-    }
-
-    /**
-     * @param Request $request
-     * @return UnAuthorizationRequest
-     * @throws \JsonMapper_Exception
-     */
-    public static function parseUnAuthorisationRequest(Request $request)
-    {
-        return RequestHelper::executeJsonMapper($request, new UnAuthorizationRequest());
-    }
-
-    /**
-     * @param Request $request
-     * @return AuthorizedDevicesRequest
-     * @throws \JsonMapper_Exception
-     */
-    public static function parseAuthorizedDevicesRequest(Request $request)
-    {
-        return RequestHelper::executeJsonMapper($request, new AuthorizedDevicesRequest());
-    }
-
-    /**
-     * @param Request $request
-     * @return AuthorizationStatusRequest
-     * @throws \JsonMapper_Exception
-     */
-    public static function parseAuthorizationStatusRequest(Request $request)
-    {
-        return RequestHelper::executeJsonMapper($request, new AuthorizationStatusRequest());
-    }
-
-    /**
-     * @param Request $request
-     * @return CreateAuthorizationRequest
-     * @throws \JsonMapper_Exception
-     */
-    public static function parseCreateAuthorizationRequest(Request $request)
-    {
-        return RequestHelper::executeJsonMapper($request, new CreateAuthorizationRequest());
-    }
-
-    /**
-     * @param Request $request
-     * @return CollectionEntriesRequest
-     * @throws \JsonMapper_Exception
-     */
-    public static function parseCollectionEntriesRequest(Request $request)
-    {
-        return RequestHelper::executeJsonMapper($request, new CollectionEntriesRequest());
-    }
-
-    /**
-     * @param Request $request
-     * @return ContentEntityHistoryRequest
-     * @throws \JsonMapper_Exception
-     */
-    public static function parseContentEntityHistoryRequest(Request $request)
-    {
-        return RequestHelper::executeJsonMapper($request, new ContentEntityHistoryRequest());
-    }
-
-    /**
-     * @param Request $request
-     * @return ContentEntityRequest
-     * @throws \JsonMapper_Exception
-     */
-    public static function parseContentEntityRequest(Request $request)
-    {
-        return RequestHelper::executeJsonMapper($request, new ContentEntityRequest());
-    }
-
-    /**
-     * @param Request $request
-     * @return RefreshRequest
-     * @throws \JsonMapper_Exception
-     */
-    public static function parseRefreshRequest(Request $request)
-    {
-        return RequestHelper::executeJsonMapper($request, new RefreshRequest());
-    }
-
-    /**
-     * @param Request $request
-     * @return UpdateRequest
-     * @throws \JsonMapper_Exception
-     */
-    public static function parseUpdateRequest(Request $request)
-    {
-        return RequestHelper::executeJsonMapper($request, new UpdateRequest());
+        return RequestHelper::executeJsonMapper($request, new SubmitRequest());
     }
 
     private static function executeJsonMapper(Request $request, $model)

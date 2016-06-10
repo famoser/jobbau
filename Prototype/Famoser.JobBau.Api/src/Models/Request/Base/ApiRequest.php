@@ -11,6 +11,5 @@ namespace Famoser\MassPass\Models\Request\Base;
 
 class ApiRequest
 {
-    public $DeviceId;
-    public $UserId;
+
 }

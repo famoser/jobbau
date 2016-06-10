@@ -42,13 +42,13 @@ CREATE TABLE skills (
 );
 
 CREATE TABLE profession_info (
-  id             INTEGER PRIMARY KEY,
-  person_id      INTEGER,
-  profession_id  INTEGER,
-  other_beruf    TEXT,
-  training_id    INTEGER,
-  other_training TEXT,
-  experience     INTEGER
+  id               INTEGER PRIMARY KEY,
+  person_id        INTEGER,
+  profession_id    INTEGER,
+  other_profession TEXT,
+  training_id      INTEGER,
+  other_training   TEXT,
+  experience_type  INTEGER
 );
 
 CREATE TABLE skill_info (

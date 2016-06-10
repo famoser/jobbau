@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: famoser
- * Date: 23.05.2016
- * Time: 09:49
+ * User: Florian Moser
+ * Date: 10.06.2016
+ * Time: 17:12
  */
 
 namespace Famoser\MassPass\Models\Response;
@@ -11,7 +11,7 @@ namespace Famoser\MassPass\Models\Response;
 
 use Famoser\MassPass\Models\Response\Base\ApiResponse;
 
-class CollectionEntriesResponse extends ApiResponse
+class SubmitResponse extends ApiResponse
 {
-    public $CollectionEntryEntities;
+
 }

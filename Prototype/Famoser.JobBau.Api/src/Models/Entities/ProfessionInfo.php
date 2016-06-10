@@ -15,10 +15,10 @@ class ProfessionInfo extends BaseEntity
 {
     public $person_id;
     public $profession_id;
-    public $other_beruf;
+    public $other_profession;
     public $training_id;
     public $other_training;
-    public $experience;
+    public $experience_type;
 
     public function getTableName()
     {
