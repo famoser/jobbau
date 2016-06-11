@@ -12,7 +12,7 @@ namespace Famoser\MassPass\Models\View;
 use Famoser\MassPass\Models\Entities\Professions;
 use Famoser\MassPass\Models\Entities\Trainings;
 
-class ProfessionViewModel
+class ProfessionViewModel extends BaseViewModel
 {
     private $profession;
 

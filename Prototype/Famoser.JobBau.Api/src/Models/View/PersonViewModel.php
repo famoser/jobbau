@@ -12,7 +12,7 @@ namespace Famoser\MassPass\Models\View;
 use Famoser\MassPass\Models\Entities\Availability;
 use Famoser\MassPass\Models\Entities\Person;
 
-class PersonViewModel
+class PersonViewModel extends BaseViewModel
 {
     private $person;
     private $professionViewModels;

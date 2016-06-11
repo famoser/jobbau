@@ -27,6 +27,7 @@ use Famoser\MassPass\Models\View\SkillInfoViewModel;
 use Famoser\MassPass\Models\View\SkillViewModel;
 use Famoser\MassPass\Models\View\TrainingViewModel;
 use Famoser\MassPass\Types\ApiErrorTypes;
+use Slim\Exception\NotFoundException;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Upload\File;
@@ -143,20 +144,64 @@ class PrototypeController extends BaseController
         $persons = $helper->getFromDatabase(new Person());
         $personViewModels = array();
         foreach ($persons as $person) {
-            $availablities = $helper->getFromDatabase(new Availability(), "person_id=:id", array("id" => $person->id));
+            $availabilities = $helper->getFromDatabase(new Availability(), "person_id=:id", array("id" => $person->id));
             $professionInfos = $helper->getFromDatabase(new ProfessionInfo(), "person_id=:id", array("id" => $person->id));
-            $professionsVm = array();
+            $professionInfosVm = array();
             foreach ($professionInfos as $profs) {
-                $professionsVm[] = new ProfessionInfoViewModel($profs, $professions, $trainings);
+                $professionInfosVm[] = new ProfessionInfoViewModel($profs, $professions, $trainings);
             }
             $skillInfos = $helper->getFromDatabase(new SkillInfo(), "person_id=:id", array("id" => $person->id));
             $skillInfosVm = array();
             foreach ($skillInfos as $skill) {
                 $skillInfosVm[] = new SkillInfoViewModel($skill, $skills);
             }
-            $personViewModels[] = new PersonViewModel($person, $professionsVm, $skillInfosVm, $availablities);
+            $personViewModels[] = new PersonViewModel($person, $professionInfosVm, $skillInfosVm, $availabilities);
         }
         $args["persons"] = $personViewModels;
+
+        return $this->renderTemplate($response, "backend/list", $args);
+    }
+
+    public function displayEntry(Request $request, Response $response, $args)
+    {
+        $helper = $this->getDatabaseHelper();
+
+        $person = $helper->getSingleFromDatabaseById(new Person(), $args["id"]);
+        if ($person == null)
+            throw new NotFoundException($request, $response);
+
+        $skills = $helper->getFromDatabase(new Skills());
+        $skillsVm = array();
+        foreach ($skills as $skill) {
+            $skillsVm[] = new SkillViewModel($skill);
+        }
+
+        $professions = $helper->getFromDatabase(new Professions());
+        $prefessionsVm = array();
+        foreach ($professions as $profession) {
+            $prefessionsVm[] = new ProfessionViewModel($profession);
+        }
+
+        $trainings = $helper->getFromDatabase(new Trainings());
+        $trainingsVm = array();
+        foreach ($trainings as $training) {
+            $trainingsVm[] = new TrainingViewModel($training);
+        }
+
+        $availabilities = $helper->getFromDatabase(new Availability(), "person_id=:id", array("id" => $person->id));
+        $professionInfos = $helper->getFromDatabase(new ProfessionInfo(), "person_id=:id", array("id" => $person->id));
+        $professionInfosVm = array();
+        foreach ($professionInfos as $profs) {
+            $professionInfosVm[] = new ProfessionInfoViewModel($profs, $professions, $trainings);
+        }
+        $skillInfos = $helper->getFromDatabase(new SkillInfo(), "person_id=:id", array("id" => $person->id));
+        $skillInfosVm = array();
+        foreach ($skillInfos as $skill) {
+            $skillInfosVm[] = new SkillInfoViewModel($skill, $skills);
+        }
+        $personViewModel = new PersonViewModel($person, $professionInfosVm, $skillInfosVm, $availabilities);
+
+        $args["person"] = $personViewModel;
 
         return $this->renderTemplate($response, "backend/list", $args);
     }

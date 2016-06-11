@@ -106,6 +106,7 @@ $app->add(new LoggingMiddleware($c));
 $routes = function () use ($controllerNamespace) {
     $this->post('/submit', $controllerNamespace . 'PrototypeController:submit');
     $this->get('/entries', $controllerNamespace . 'PrototypeController:entries');
+    $this->get('/entries/{id:[0-9]+}', $controllerNamespace . 'PrototypeController:displayEntry');
 };
 
 

@@ -197,6 +197,16 @@ class DatabaseHelper
 
     /**
      * @param BaseEntity $entity
+     * @param integer $id
+     * @return bool|Availability|Person|PersonMetaData|ProfessionInfo|Professions|SkillInfo|Skills|Trainings
+     */
+    public function getSingleFromDatabaseById(BaseEntity $entity, $id)
+    {
+        return $this->getSingleFromDatabase($entity, "id=:id", array("id" => $id));
+    }
+
+    /**
+     * @param BaseEntity $entity
      * @return bool
      */
     public function saveToDatabase(BaseEntity $entity)
