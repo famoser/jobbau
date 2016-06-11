@@ -21,9 +21,4 @@ class BaseRepository
     {
         $this->databaseHelper = $helper;
     }
-    
-    protected function getAllFromDatabaseToViewModels(BaseEntity $entity, BaseViewModel $viewModel)
-    {
-        
-    }
 }
