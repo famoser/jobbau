@@ -3,7 +3,8 @@ body, html {
     width: 100%;
 }
 
-#content:after {
+#content:after,
+.property-group:after {
     content: ".";
     clear: both;
     display: block;
@@ -31,4 +32,12 @@ ul {
 
 ul li {
     padding: 0 0 0.2em 0;
+}
+
+.property .title {
+    margin-bottom: 0;
+}
+
+.property .value {
+    font-weight: bold;
 }

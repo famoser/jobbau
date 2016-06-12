@@ -20,8 +20,11 @@ use Famoser\MassPass\Models\Entities\SkillInfo;
 use Famoser\MassPass\Models\Entities\Skills;
 use Famoser\MassPass\Models\Entities\Trainings;
 use Famoser\MassPass\Models\Response\SubmitResponse;
+use Famoser\MassPass\Models\View\AvailabilityModel;
 use Famoser\MassPass\Models\View\PersonModel;
+use Famoser\MassPass\Models\View\ProfessionInfoModel;
 use Famoser\MassPass\Models\View\ProfessionModel;
+use Famoser\MassPass\Models\View\SkillInfoModel;
 use Famoser\MassPass\Models\View\SkillModel;
 use Famoser\MassPass\Models\View\TrainingModel;
 use Famoser\MassPass\Types\ApiErrorTypes;
@@ -62,6 +65,7 @@ class PrototypeController extends BaseController
             $person->birthday_date = FormatHelper::fromSwiftDate($model->Person->birthday_date);
             $person->mobile = $model->Person->mobile;
             $person->email = $model->Person->email;
+            $person->picture_src = $model->Person->guid . "." . $file->getExtension();
             $person->looking_for_job = true;
 
             if (!$helper->saveToDatabase($person)) {
@@ -118,21 +122,21 @@ class PrototypeController extends BaseController
     {
         $helper = $this->getDatabaseHelper();
 
-        $skills = $helper->getFromDatabase(new Skills());
+        $skills = $helper->getFromDatabase(new Skills(), null, null, "id");
         $skillsVm = array();
         foreach ($skills as $skill) {
             $skillsVm[] = new SkillModel($skill);
         }
         $args["skills"] = $skillsVm;
 
-        $professions = $helper->getFromDatabase(new Professions());
+        $professions = $helper->getFromDatabase(new Professions(), null, null, "id");
         $prefessionsVm = array();
         foreach ($professions as $profession) {
             $prefessionsVm[] = new ProfessionModel($profession);
         }
         $args["professions"] = $prefessionsVm;
 
-        $trainings = $helper->getFromDatabase(new Trainings());
+        $trainings = $helper->getFromDatabase(new Trainings(), null, null, "id");
         $trainingsVm = array();
         foreach ($trainings as $training) {
             $trainingsVm[] = new TrainingModel($training);
@@ -143,17 +147,22 @@ class PrototypeController extends BaseController
         $personViewModels = array();
         foreach ($persons as $person) {
             $availabilities = $helper->getFromDatabase(new Availability(), "person_id=:id", array("id" => $person->id));
+            $availabilityVms = array();
+            foreach ($availabilities as $availability) {
+                $availabilityVms[] = new AvailabilityModel($availability);
+            }
+
             $professionInfos = $helper->getFromDatabase(new ProfessionInfo(), "person_id=:id", array("id" => $person->id));
             $professionInfosVm = array();
             foreach ($professionInfos as $profs) {
-                $professionInfosVm[] = new ProfessionModel($profs, $professions, $trainings);
+                $professionInfosVm[] = new ProfessionInfoModel($profs, $professions, $trainings);
             }
             $skillInfos = $helper->getFromDatabase(new SkillInfo(), "person_id=:id", array("id" => $person->id));
             $skillInfosVm = array();
             foreach ($skillInfos as $skill) {
-                $skillInfosVm[] = new SkillModel($skill, $skills);
+                $skillInfosVm[] = new SkillInfoModel($skill, $skills);
             }
-            $personViewModels[] = new PersonModel($person, $professionInfosVm, $skillInfosVm, $availabilities);
+            $personViewModels[] = new PersonModel($person, $professionInfosVm, $skillInfosVm, $availabilityVms);
         }
         $args["persons"] = $personViewModels;
 
@@ -162,6 +171,9 @@ class PrototypeController extends BaseController
 
     public function createSamples(Request $request, Response $response, $args)
     {
+        if (!$request->getAttribute("test_mode"))
+            return $response->write("denied");
+
         $helper = $this->getDatabaseHelper();;
 
         $testDataFiles = glob($this->container["settings"]["asset_path"] . "/testData/*"); // get all file names
@@ -170,6 +182,7 @@ class PrototypeController extends BaseController
                 $table = substr(basename($file), 0, strlen(".json") * -1);
                 $json = file_get_contents($file);
                 $list = json_decode($json, true);
+                $helper->execute("DELETE FROM " . $table);
                 foreach ($list as $item) {
                     $helper->insertRaw($table, $item);
                 }
@@ -186,40 +199,45 @@ class PrototypeController extends BaseController
         if ($person == null)
             throw new NotFoundException($request, $response);
 
-        $skills = $helper->getFromDatabase(new Skills());
+        $skills = $helper->getFromDatabase(new Skills(), null, null, "id");
         $skillsVm = array();
         foreach ($skills as $skill) {
             $skillsVm[] = new SkillModel($skill);
         }
 
-        $professions = $helper->getFromDatabase(new Professions());
+        $professions = $helper->getFromDatabase(new Professions(), null, null, "id");
         $prefessionsVm = array();
         foreach ($professions as $profession) {
             $prefessionsVm[] = new ProfessionModel($profession);
         }
 
-        $trainings = $helper->getFromDatabase(new Trainings());
+        $trainings = $helper->getFromDatabase(new Trainings(), null, null, "id");
         $trainingsVm = array();
         foreach ($trainings as $training) {
             $trainingsVm[] = new TrainingModel($training);
         }
 
         $availabilities = $helper->getFromDatabase(new Availability(), "person_id=:id", array("id" => $person->id));
+        $availabilityVms = array();
+        foreach ($availabilities as $availability) {
+            $availabilityVms[] = new AvailabilityModel($availability);
+        }
+
         $professionInfos = $helper->getFromDatabase(new ProfessionInfo(), "person_id=:id", array("id" => $person->id));
         $professionInfosVm = array();
         foreach ($professionInfos as $profs) {
-            $professionInfosVm[] = new ProfessionModel($profs, $professions, $trainings);
+            $professionInfosVm[] = new ProfessionInfoModel($profs, $professions, $trainings);
         }
         $skillInfos = $helper->getFromDatabase(new SkillInfo(), "person_id=:id", array("id" => $person->id));
         $skillInfosVm = array();
         foreach ($skillInfos as $skill) {
-            $skillInfosVm[] = new SkillModel($skill, $skills);
+            $skillInfosVm[] = new SkillInfoModel($skill, $skills);
         }
-        $personViewModel = new PersonModel($person, $professionInfosVm, $skillInfosVm, $availabilities);
+        $personViewModel = new PersonModel($person, $professionInfosVm, $skillInfosVm, $availabilityVms);
 
         $args["person"] = $personViewModel;
 
-        return $this->renderTemplate($response, "backend/list", $args);
+        return $this->renderTemplate($response, "backend/entry", $args);
     }
 
     private function getUserDirForContent($userGuid)

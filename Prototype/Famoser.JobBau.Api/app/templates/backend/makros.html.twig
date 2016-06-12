@@ -1,0 +1,6 @@
+{% macro property_block(name, property, size = 4) %}
+    <div class="property col-md-{{ size }}">
+        <p class="title">{{ name }}</p>
+        <p class="value">{{ property }}</p>
+    </div>
+{% endmacro %}

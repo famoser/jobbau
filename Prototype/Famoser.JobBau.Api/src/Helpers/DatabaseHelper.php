@@ -76,7 +76,7 @@ class DatabaseHelper
         DatabaseHelper::$activePathKey = $newPathKey;
     }
 
-    public function initializeDatabase()
+    private function initializeDatabase()
     {
         $activePath = $this->container["settings"]["data_path"] . "/" . $this->container['settings']['db'][DatabaseHelper::$activePathKey];
 
@@ -98,11 +98,6 @@ class DatabaseHelper
 
         $this->database = $this->constructPdo($activePath);
         return true;
-    }
-
-    public function createUniqueVersion()
-    {
-        return sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
     }
 
     private function createQuery(BaseEntity $entity, $where = null, $parameters = null, $orderBy = null, $limit = 1000)
@@ -205,6 +200,12 @@ class DatabaseHelper
         return $this->getSingleFromDatabase($entity, "id=:id", array("id" => $id));
     }
 
+    /**
+     * insert the array into the database
+     * @param $tableName
+     * @param $array
+     * @return bool
+     */
     public function insertRaw($tableName, $array)
     {
         $sql = "INSERT INTO " . $tableName . "(";
@@ -280,5 +281,16 @@ class DatabaseHelper
         $params = array("id" => $entity->id);
         $prep = $this->getConnection()->prepare($sql);
         return $prep->execute($params);
+    }
+
+    /**
+     * @param $query
+     * @param array|null $parameters
+     * @return bool
+     */
+    public function execute($query, array $parameters = null)
+    {
+        $prep = $this->getConnection()->prepare($query);
+        return $prep->execute($parameters);
     }
 }

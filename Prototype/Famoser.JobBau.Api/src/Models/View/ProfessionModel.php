@@ -24,7 +24,7 @@ class ProfessionModel extends BaseModel
 
     public function getSortClass()
     {
-        return $this->profession->id;
+        return "profession_" . $this->profession->id;
     }
 
     public function getName()
@@ -46,5 +46,13 @@ class ProfessionModel extends BaseModel
     public function addTraining(Trainings $training)
     {
         $this->trainings[] = $training;
+    }
+
+    /**
+     * @return Professions
+     */
+    public function getProfession()
+    {
+        return $this->profession;
     }
 }

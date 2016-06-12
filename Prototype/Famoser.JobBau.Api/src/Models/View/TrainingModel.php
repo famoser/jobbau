@@ -29,4 +29,12 @@ class TrainingModel extends BaseModel
     {
         return $this->training->name;
     }
+
+    /**
+     * @return Trainings
+     */
+    public function getTraining()
+    {
+        return $this->training;
+    }
 }

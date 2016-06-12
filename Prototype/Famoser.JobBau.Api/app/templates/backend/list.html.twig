@@ -12,7 +12,7 @@
             </thead>
             <tbody>
             {% for person in persons %}
-                <tr class="{{ person.getSortClasses }}">
+                <tr data-href="{{ path_for('entry', {'id': person.getPerson.id}) }}" class="{{ person.getSortClasses }}">
                     <td>{{ person.getName }}</td>
                     <td>{{ person.getProfessions }}</td>
                     <td>{{ person.getAvailability }}</td>

@@ -41,7 +41,7 @@ class SkillInfoModel extends BaseModel
         return null;
     }
 
-    public function getSkillSortClass()
+    public function getSkillSortClassArray()
     {
         $arr = array();
         if (isset($this->skills[$this->info->skill_id])) {

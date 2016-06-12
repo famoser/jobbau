@@ -1,0 +1,71 @@
+{% extends "backend/layout.html.twig" %}
+{% import "backend/makros.html.twig" as makros %}
+
+{% block content %}
+
+    <div class="entry-block">
+        <div class="property col-md-12">
+            <h2>Steckbrief</h2>
+        </div>
+
+        <div class="property-group">
+            <div class="col-md-2">
+                <img class="img-responsive" src="/images/portraits/{{ person.getPerson.picture_src }}"/>
+            </div>
+            <div class="col-md-10">
+                <div class="property-group">
+                    {{ makros.property_block("Vorname", person.getPerson.first_name, 3) }}
+                    {{ makros.property_block("Nachname", person.getPerson.last_name, 3) }}
+                    {{ makros.property_block("Alter", person.getAge, 3) }}
+                </div>
+                <hr/>
+
+                <div class="property-group">
+                    {{ makros.property_block("Strasse & Nr", person.getPerson.street_and_nr, 3) }}
+                    {{ makros.property_block("Adresszeile 2", person.getPerson.address_line_2, 3) }}
+                    {{ makros.property_block("Plz", person.getPerson.plz, 2) }}
+                    {{ makros.property_block("Ort", person.getPerson.place, 2) }}
+                    {{ makros.property_block("Land", person.getPerson.land, 2) }}
+                </div>
+                <hr/>
+
+                <div class="property-group">
+                    {{ makros.property_block("Email", person.getPerson.email, 4) }}
+                    {{ makros.property_block("Mobile", person.getPerson.mobile, 4) }}
+                </div>
+                <hr/>
+
+                <div class="property-group">
+                    {{ makros.property_block("Kommentar", person.getPerson.comment, 12) }}
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="property col-md-12">
+            <h2>Beruf</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Beruf</th>
+                    <th>Ausbildung</th>
+                    <th>Berufserfahrung</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for profession in person.getProfessionModels %}
+                <tr>
+                    <td>{{ profession. }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="property-group">
+            <h2>Beruf</h2>
+            <div class="col-md-2">
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -104,10 +104,10 @@ $app->add(new TestsMiddleware($c));
 $app->add(new LoggingMiddleware($c));
 
 $routes = function () use ($controllerNamespace) {
-    $this->post('/submit', $controllerNamespace . 'PrototypeController:submit');
-    $this->get('/entries', $controllerNamespace . 'PrototypeController:entries');
-    $this->get('/entries/{id:[0-9]+}', $controllerNamespace . 'PrototypeController:displayEntry');
-    $this->get('/entries/createSamples', $controllerNamespace . 'PrototypeController:createSamples');
+    $this->post('/submit', $controllerNamespace . 'PrototypeController:submit')->setName("submit");
+    $this->get('/entries', $controllerNamespace . 'PrototypeController:entries')->setName("entries");
+    $this->get('/entries/{id:[0-9]+}', $controllerNamespace . 'PrototypeController:displayEntry')->setName("entry");
+    $this->get('/entries/createSamples', $controllerNamespace . 'PrototypeController:createSamples')->setName("samples");
 };
 
 

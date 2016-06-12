@@ -22,11 +22,19 @@ class SkillModel extends BaseModel
 
     public function getSortClass()
     {
-        return $this->skill->id;
+        return "skill_".$this->skill->id;
     }
 
     public function getName()
     {
         return $this->skill->name;
+    }
+
+    /**
+     * @return Skills
+     */
+    public function getSkill()
+    {
+        return $this->skill;
     }
 }
