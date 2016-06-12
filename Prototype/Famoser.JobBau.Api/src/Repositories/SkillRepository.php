@@ -11,12 +11,12 @@ namespace Famoser\MassPass\Repositories;
 
 use Famoser\MassPass\Helpers\DatabaseHelper;
 use Famoser\MassPass\Models\Entities\Skills;
-use Famoser\MassPass\Models\View\SkillViewModel;
+use Famoser\MassPass\Models\View\SkillModel;
 
 class SkillRepository extends GenericRepository
 {
     public function getSkills()
     {
-        return $this->genericGetAllAsViewModels(new Skills(), new SkillViewModel(new Skills()));
+        return $this->genericGetAllAsViewModels(new Skills(), new SkillModel(new Skills()));
     }
 }

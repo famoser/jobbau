@@ -13,14 +13,14 @@ use Famoser\MassPass\Helpers\DatabaseHelper;
 use Famoser\MassPass\Models\Entities\Professions;
 use Famoser\MassPass\Models\Entities\Skills;
 use Famoser\MassPass\Models\Entities\Trainings;
-use Famoser\MassPass\Models\View\ProfessionViewModel;
-use Famoser\MassPass\Models\View\SkillViewModel;
-use Famoser\MassPass\Models\View\TrainingViewModel;
+use Famoser\MassPass\Models\View\ProfessionModel;
+use Famoser\MassPass\Models\View\SkillModel;
+use Famoser\MassPass\Models\View\TrainingModel;
 
 class TrainingRepository extends GenericRepository
 {
     public function getTrainings()
     {
-        return $this->genericGetAllAsViewModels(new Trainings(), new TrainingViewModel(new Trainings()));
+        return $this->genericGetAllAsViewModels(new Trainings(), new TrainingModel(new Trainings()));
     }
 }

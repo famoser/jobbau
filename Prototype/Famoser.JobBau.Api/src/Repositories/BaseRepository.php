@@ -11,7 +11,7 @@ namespace Famoser\MassPass\Repositories;
 
 use Famoser\MassPass\Helpers\DatabaseHelper;
 use Famoser\MassPass\Models\Entities\Base\BaseEntity;
-use Famoser\MassPass\Models\View\BaseViewModel;
+use Famoser\MassPass\Models\View\BaseModel;
 
 class BaseRepository
 {

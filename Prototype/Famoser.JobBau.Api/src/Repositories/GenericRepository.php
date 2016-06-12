@@ -10,11 +10,11 @@ namespace Famoser\MassPass\Repositories;
 
 
 use Famoser\MassPass\Models\Entities\Base\BaseEntity;
-use Famoser\MassPass\Models\View\BaseViewModel;
+use Famoser\MassPass\Models\View\BaseModel;
 
 class GenericRepository extends BaseRepository
 {
-    protected function genericGetAllAsViewModels(BaseEntity $entity, BaseViewModel $viewModel)
+    protected function genericGetAllAsViewModels(BaseEntity $entity, BaseModel $viewModel)
     {
         $entityClass = get_class($entity);
         $viewModelClass = get_class($viewModel);

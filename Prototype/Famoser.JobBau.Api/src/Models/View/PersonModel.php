@@ -12,7 +12,7 @@ namespace Famoser\MassPass\Models\View;
 use Famoser\MassPass\Models\Entities\Availability;
 use Famoser\MassPass\Models\Entities\Person;
 
-class PersonViewModel extends BaseViewModel
+class PersonModel extends BaseModel
 {
     private $person;
     private $professionViewModels;
@@ -22,8 +22,8 @@ class PersonViewModel extends BaseViewModel
     /**
      * PersonViewModel constructor.
      * @param Person $person
-     * @param ProfessionInfoViewModel[] $professionViewModels
-     * @param SkillInfoViewModel[] $skillViewModels
+     * @param ProfessionModel[] $professionViewModels
+     * @param SkillModel[] $skillViewModels
      * @param Availability[] $availability
      */
     public function __construct(Person $person, array $professionViewModels, array $skillViewModels, array $availability)

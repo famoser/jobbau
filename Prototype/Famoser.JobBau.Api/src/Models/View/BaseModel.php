@@ -9,7 +9,7 @@
 namespace Famoser\MassPass\Models\View;
 
 
-class BaseViewModel
+class BaseModel
 {
 
 }

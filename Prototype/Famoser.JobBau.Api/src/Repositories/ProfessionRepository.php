@@ -12,13 +12,13 @@ namespace Famoser\MassPass\Repositories;
 use Famoser\MassPass\Helpers\DatabaseHelper;
 use Famoser\MassPass\Models\Entities\Professions;
 use Famoser\MassPass\Models\Entities\Skills;
-use Famoser\MassPass\Models\View\ProfessionViewModel;
-use Famoser\MassPass\Models\View\SkillViewModel;
+use Famoser\MassPass\Models\View\ProfessionModel;
+use Famoser\MassPass\Models\View\SkillModel;
 
 class ProfessionRepository extends GenericRepository
 {
     public function getProfessions()
     {
-        return $this->genericGetAllAsViewModels(new Professions(), new ProfessionViewModel(new Professions()));
+        return $this->genericGetAllAsViewModels(new Professions(), new ProfessionModel(new Professions()));
     }
 }
