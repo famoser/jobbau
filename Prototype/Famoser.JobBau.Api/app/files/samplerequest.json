@@ -1,0 +1,52 @@
+{
+  "Person": {
+    "guid": "5e02d26c-66a0-4ca1-8f55-0b9f6aa21f2c",
+    "first_name": "Stephan",
+    "last_name": "Zweig",
+    "street_and_nr": "Via Camischolas sura 53",
+    "address_line_2": "",
+    "plz": "6036",
+    "place": "Dierikon",
+    "land": "Schweiz",
+    "email": "StephanZweig@einrot.com",
+    "mobile": "041 801 18 13",
+    "birthday_date": 418118400,
+    "comment": "brauche dringend einen Job, um weitere Waffenkäufe finanzieren zu können"
+  },
+  "ProfessionInfos": [
+    {
+      "profession_id": 2,
+      "other_profession": "",
+      "training_id": 0,
+      "other_training": "Praktikant",
+      "experience_type": 1
+    },
+    {
+      "profession_id": 1,
+      "other_profession": "",
+      "training_id": 1,
+      "other_training": "",
+      "experience_type": 1
+    }
+  ],
+  "SkillInfos": [
+    {
+      "skill_id": 2,
+      "value": "true"
+    },
+    {
+      "skill_id": 3,
+      "value": "true"
+    }
+  ],
+  "Availabilities": [
+    {
+      "start_date": "16.07.2016",
+      "end_date": "19.07.2016"
+    },
+    {
+      "start_date": "01.08.2016",
+      "end_date": ""
+    }
+  ]
+}
