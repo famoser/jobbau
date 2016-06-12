@@ -14,6 +14,8 @@
 		9535D5541D0AEC8600BD38B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9535D5521D0AEC8600BD38B5 /* LaunchScreen.storyboard */; };
 		9535D55F1D0AEC8600BD38B5 /* JobBauTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9535D55E1D0AEC8600BD38B5 /* JobBauTests.swift */; };
 		9535D56A1D0AEC8600BD38B5 /* JobBauUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9535D5691D0AEC8600BD38B5 /* JobBauUITests.swift */; };
+		9535D5781D0B1D8900BD38B5 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9535D5771D0B1D8900BD38B5 /* EditorViewController.swift */; };
+		9535D57A1D0B856500BD38B5 /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9535D5791D0B856500BD38B5 /* PhotoHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		9535D5651D0AEC8600BD38B5 /* JobBauUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JobBauUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9535D5691D0AEC8600BD38B5 /* JobBauUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobBauUITests.swift; sourceTree = "<group>"; };
 		9535D56B1D0AEC8600BD38B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9535D5771D0B1D8900BD38B5 /* EditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
+		9535D5791D0B856500BD38B5 /* PhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				9535D5491D0AEC8600BD38B5 /* AppDelegate.swift */,
+				9535D5771D0B1D8900BD38B5 /* EditorViewController.swift */,
 				9535D54B1D0AEC8600BD38B5 /* LoginViewController.swift */,
+				9535D5791D0B856500BD38B5 /* PhotoHelper.swift */,
 				9535D54D1D0AEC8600BD38B5 /* Main.storyboard */,
 				9535D5501D0AEC8600BD38B5 /* Assets.xcassets */,
 				9535D5521D0AEC8600BD38B5 /* LaunchScreen.storyboard */,
@@ -257,6 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9535D54C1D0AEC8600BD38B5 /* LoginViewController.swift in Sources */,
+				9535D5781D0B1D8900BD38B5 /* EditorViewController.swift in Sources */,
+				9535D57A1D0B856500BD38B5 /* PhotoHelper.swift in Sources */,
 				9535D54A1D0AEC8600BD38B5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +492,7 @@
 				9535D5701D0AEC8600BD38B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9535D5711D0AEC8600BD38B5 /* Build configuration list for PBXNativeTarget "JobBauTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +501,7 @@
 				9535D5731D0AEC8600BD38B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9535D5741D0AEC8600BD38B5 /* Build configuration list for PBXNativeTarget "JobBauUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +510,7 @@
 				9535D5761D0AEC8600BD38B5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
