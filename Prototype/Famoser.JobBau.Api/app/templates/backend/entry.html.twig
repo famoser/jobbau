@@ -43,29 +43,81 @@
         <hr/>
         <div class="property col-md-12">
             <h2>Beruf</h2>
-            <table>
-                <thead>
-                <tr>
-                    <th>Beruf</th>
-                    <th>Ausbildung</th>
-                    <th>Berufserfahrung</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for profession in person.getProfessionModels %}
-                <tr>
-                    <td>{{ profession. }}</td>
-                </tr>
-                </tbody>
-            </table>
         </div>
-
         <div class="property-group">
-            <h2>Beruf</h2>
-            <div class="col-md-2">
-
-
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Beruf</th>
+                        <th>Ausbildung</th>
+                        <th>Berufserfahrung</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for profession in person.getProfessionInfoModels %}
+                        <tr>
+                            <td>{{ profession.getProfessionName }}</td>
+                            <td>{{ profession.getTrainingName }}</td>
+                            <td>{{ profession.getExperience }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
+        <hr/>
+        <div class="property col-md-12">
+            <h2>Skills</h2>
+        </div>
+        <div class="property-group">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Skill</th>
+                        <th>Wert</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if person.getSkillInfoModels|length  > 0 %}
+                        {% for skill in person.getSkillInfoModels %}
+                            <tr>
+                                <td>{{ skill.getSkill.name }}</td>
+                                <td>{{ skill.getSkillValue }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        hallo welt
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr/>
+        <div class="property col-md-12">
+            <h2>Verfügbarkeit</h2>
+        </div>
+        <div class="property-group">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Anfang</th>
+                        <th>Ende</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for availability in person.getAvailabilityModels %}
+                        <tr>
+                            <td>{{ availability.getStartDate }}</td>
+                            <td>{{ availability.getEndDate }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 {% endblock %}

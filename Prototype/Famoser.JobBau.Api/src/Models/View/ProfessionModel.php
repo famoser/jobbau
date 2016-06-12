@@ -11,6 +11,7 @@ namespace Famoser\MassPass\Models\View;
 
 use Famoser\MassPass\Models\Entities\Professions;
 use Famoser\MassPass\Models\Entities\Trainings;
+use Famoser\MassPass\Types\ExperienceTypes;
 
 class ProfessionModel extends BaseModel
 {

@@ -1,14 +1,17 @@
 [
   {
     "id": 1,
+    "type": 1,
     "name": "Fahrprüfung (PKW)"
   },
   {
     "id": 2,
+    "type": 1,
     "name": "Kranführer"
   },
   {
     "id": 3,
+    "type": 1,
     "name": "Vorarbeiterin/Vorarbeiter (Diplom)"
   }
 ]

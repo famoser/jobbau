@@ -11,6 +11,7 @@ namespace Famoser\MassPass\Models\View;
 
 use Famoser\MassPass\Models\Entities\Availability;
 use Famoser\MassPass\Models\Entities\Person;
+use Famoser\MassPass\Types\SkillTypes;
 
 class PersonModel extends BaseModel
 {
@@ -81,13 +82,15 @@ class PersonModel extends BaseModel
         $skills = array();
         foreach ($this->skillInfoModels as $skillViewModel) {
             $temp = $skillViewModel->getSkill();
-            if ($temp != "")
-                $skills[] = $temp;
+            if ($temp->type == SkillTypes::BOOLEAN) {
+                if ($skillViewModel->getInfo()->value)
+                    $skills[] = $temp->name;
+            }
         }
         return join(", ", $skills);
     }
 
-    public function getAvailabilityModels()
+    public function getAvailability()
     {
         if (!$this->person->looking_for_job)
             return "nicht verfügbar (nicht auf jobsuche)";
@@ -107,8 +110,7 @@ class PersonModel extends BaseModel
 
     public function getAge()
     {
-        //date in mm/dd/yyyy format; or it can be in other formats as well
-        $birthDate = date("mm/dd/yyyy", $this->getPerson()->birthday_date);
+        $birthDate = date("m/d/Y", $this->getPerson()->birthday_date);
         //explode the date to get month, day and year
         $birthDate = explode("/", $birthDate);
         $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
@@ -131,5 +133,13 @@ class PersonModel extends BaseModel
     public function getSkillInfoModels()
     {
         return $this->skillInfoModels;
+    }
+
+    /**
+     * @return AvailabilityModel[]
+     */
+    public function getAvailabilityModels()
+    {
+        return $this->availabilityModels;
     }
 }

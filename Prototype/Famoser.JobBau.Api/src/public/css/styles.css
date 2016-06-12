@@ -41,3 +41,45 @@ ul li {
 .property .value {
     font-weight: bold;
 }
+
+table.clickable tr td,
+.clickable p,
+.clickable h3,
+.clickable img {
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+table.clickable tr:hover td,
+.clickable:hover p,
+.clickable:hover h3 {
+    color: #ff7496 !important;
+}
+
+.steckbrief {
+    border: 1px solid #eee;
+    padding: 30px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.steckbrief h3 {
+    margin: 1em 0 2em 0;
+    text-align: center;
+}
+
+.steckbrief p {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    text-transform: none;
+    letter-spacing: normal;
+    margin: 0 0 0.8em 0;
+    line-height: 1.5em;
+}
+
+.steckbrief img {
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 100%;
+}

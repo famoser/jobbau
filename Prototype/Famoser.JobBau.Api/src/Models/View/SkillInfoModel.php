@@ -29,16 +29,28 @@ class SkillInfoModel extends BaseModel
         $this->skills = $skills;
     }
 
+    /**
+     * @return Skills|null
+     */
     public function getSkill()
     {
-        if (isset($this->skills[$this->info->skill_id])) {
-            $skill = $this->skills[$this->info->skill_id];
-            if ($skill->type == SkillTypes::BOOLEAN) {
-                if ($this->info->value)
-                    return $this->skills[$this->info->skill_id]->name;
-            }
+        if (isset($this->skills[$this->info->skill_id - 1])) {
+            return $this->skills[$this->info->skill_id - 1];
         }
         return null;
+    }
+
+    public function getSkillValue()
+    {
+        $skill = $this->getSkill();
+        if ($skill != null) {
+            if ($skill->type == SkillTypes::BOOLEAN) {
+                if ($this->info->value == "true")
+                    return "Ja";
+                return "Nein";
+            }
+        }
+        return "-";
     }
 
     public function getSkillSortClassArray()
@@ -52,5 +64,13 @@ class SkillInfoModel extends BaseModel
             }
         }
         return $arr;
+    }
+
+    /**
+     * @return SkillInfo
+     */
+    public function getInfo()
+    {
+        return $this->info;
     }
 }

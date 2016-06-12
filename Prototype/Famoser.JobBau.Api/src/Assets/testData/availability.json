@@ -8,5 +8,15 @@
     "person_id": 1,
     "start_date": 1468998000,
     "end_date": 0
+  },
+  {
+    "person_id": 2,
+    "start_date": 1467470000,
+    "end_date": 0
+  },
+  {
+    "person_id": 3,
+    "start_date": 1466420000,
+    "end_date": 0
   }
 ]

@@ -22,5 +22,21 @@
     "training_id": 0,
     "other_training": "Glaser MSZ",
     "experience_type": 2
+  },
+  {
+    "person_id": 2,
+    "profession_id": 1,
+    "other_profession": "",
+    "training_id": 2,
+    "other_training": "",
+    "experience_type": 3
+  },
+  {
+    "person_id": 3,
+    "profession_id": 2,
+    "other_profession": "",
+    "training_id": 2,
+    "other_training": "",
+    "experience_type": 1
   }
 ]

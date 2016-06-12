@@ -12,6 +12,7 @@ namespace Famoser\MassPass\Models\View;
 use Famoser\MassPass\Models\Entities\ProfessionInfo;
 use Famoser\MassPass\Models\Entities\Professions;
 use Famoser\MassPass\Models\Entities\Trainings;
+use Famoser\MassPass\Types\ExperienceTypes;
 
 class ProfessionInfoModel extends BaseModel
 {
@@ -32,7 +33,7 @@ class ProfessionInfoModel extends BaseModel
         $this->trainings = $trainings;
     }
 
-    private function getProfessionName()
+    public function getProfessionName()
     {
         $prof = $this->getProfession();
         if ($prof == null) {
@@ -41,11 +42,11 @@ class ProfessionInfoModel extends BaseModel
         return $prof->name;
     }
 
-    private function getTrainingName()
+    public function getTrainingName()
     {
         $train = $this->getTraining();
         if ($train == null) {
-            return $this->info->other_profession;
+            return $this->info->other_training;
         }
         return $train->name;
     }
@@ -93,5 +94,10 @@ class ProfessionInfoModel extends BaseModel
             $arr[] = "training_" . $this->info->training_id;
         }
         return $arr;
+    }
+
+    public function getExperience()
+    {
+        return ExperienceTypes::toString($this->info->experience_type);
     }
 }

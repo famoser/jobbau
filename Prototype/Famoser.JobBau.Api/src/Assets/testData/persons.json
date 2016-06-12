@@ -15,5 +15,39 @@
     "picture_src": "5e02d26c-66a0-4ca1-8f55-0b9f6aa21f2c.gif",
     "looking_for_job": true,
     "comment": "brauche dringend einen Job, um weitere Waffenkäufe finanzieren zu können"
+  },
+  {
+    "id": 2,
+    "guid": "ddfde490-8d16-4089-9ca8-353668a82473",
+    "first_name": "Leonie",
+    "last_name": "Daecher",
+    "street_and_nr": "Kirchstrasse 124",
+    "address_line_2": "",
+    "plz": "1236",
+    "place": "La Petite Grave",
+    "land": "Schweiz",
+    "email": "LeonieDaecher@cuvox.de",
+    "mobile": "022 253 46 47",
+    "birthday_date": 418218400,
+    "picture_src": "ddfde490-8d16-4089-9ca8-353668a82473.jpg",
+    "looking_for_job": true,
+    "comment": "danke für die Jobangebote!"
+  },
+  {
+    "id": 3,
+    "guid": "971a8ba2-aee6-4c01-8293-0776e6198b51",
+    "first_name": "Maik",
+    "last_name": "Bayer",
+    "street_and_nr": "Üerklisweg 59",
+    "address_line_2": "",
+    "plz": "1719",
+    "place": "Brünisried",
+    "land": "Schweiz",
+    "email": "MaikBayer@einrot.com",
+    "mobile": "026 374 97 92",
+    "birthday_date": 418112400,
+    "picture_src": "971a8ba2-aee6-4c01-8293-0776e6198b51.jpg",
+    "looking_for_job": true,
+    "comment": "danke für die Jobangebote!"
   }
 ]

@@ -2,7 +2,8 @@
 
 {% block content %}
     <div class="col-md-10">
-        <table class="table">
+        {#
+        <table class="table clickable">
             <thead>
             <tr>
                 <th>Name</th>
@@ -12,7 +13,8 @@
             </thead>
             <tbody>
             {% for person in persons %}
-                <tr data-href="{{ path_for('entry', {'id': person.getPerson.id}) }}" class="{{ person.getSortClasses }}">
+                <tr data-href="{{ path_for('entry', {'id': person.getPerson.id}) }}"
+                    class="{{ person.getSortClasses }} element-item">
                     <td>{{ person.getName }}</td>
                     <td>{{ person.getProfessions }}</td>
                     <td>{{ person.getAvailability }}</td>
@@ -20,34 +22,55 @@
             {% endfor %}
             </tbody>
         </table>
+        #}
+        <div class="filter-target">
+            {% for person in persons %}
+                <div data-href="{{ path_for('entry', {'id': person.getPerson.id}) }}"
+                     class="{{ person.getSortClasses }} filter-item clickable col-md-3 steckbrief">
+                    <img class="img-responsive" src="/images/portraits/{{ person.getPerson.picture_src }}"/>
+                    <h3>{{ person.getName }}</h3>
+                    <p>{{ person.getProfessions }}</p>
+                    <p>{{ person.getAvailability }}</p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     <div class="col-md-2">
         <h3>1. Filter Beruf</h3>
-        <ul>
+        <ul class="filters">
             {% for profession in professions %}
                 <li>
                     <button class="button"
-                            data-filter="{{ profession.getSortClass }}">{{ profession.getName }}</button>
+                            data-filter=".{{ profession.getSortClass }}">{{ profession.getName }}</button>
                 </li>
             {% endfor %}
+            <li>
+                <button class="button" data-filter="*">Alle</button>
+            </li>
         </ul>
         <hr/>
         <h3>2. Filter Ausbildung</h3>
-        <ul>
+        <ul class="filters">
             {% for training in trainings %}
                 <li>
-                    <button class="button" data-filter="{{ training.getSortClass }}">{{ training.getName }}</button>
+                    <button class="button" data-filter=".{{ training.getSortClass }}">{{ training.getName }}</button>
                 </li>
             {% endfor %}
+            <li>
+                <button class="button" data-filter="*">Alle</button>
+            </li>
         </ul>
         <hr/>
         <h3>3. Filter Skills</h3>
-        <ul>
+        <ul class="filters">
             {% for skill in skills %}
                 <li>
-                    <button class="button" data-filter="{{ skill.getSortClass }}">{{ skill.getName }}</button>
+                    <button class="button" data-filter=".{{ skill.getSortClass }}">{{ skill.getName }}</button>
                 </li>
             {% endfor %}
+            <li>
+                <button class="button" data-filter="*">Alle</button>
+            </li>
         </ul>
         <hr/>
     </div>
