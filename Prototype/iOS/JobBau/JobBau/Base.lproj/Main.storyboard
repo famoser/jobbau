@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="VXJ-7O-l3g" userLabel="Main Stack">
-                                <rect key="frame" x="150" y="52" width="300" height="168"/>
+                                <rect key="frame" x="150" y="52" width="300" height="206"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hLQ-AB-y7u" userLabel="Title">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="68"/>
@@ -39,7 +40,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Tvj-35-sZb" userLabel="Fields">
-                                        <rect key="frame" x="0.0" y="100" width="300" height="68"/>
+                                        <rect key="frame" x="0.0" y="100" width="300" height="106"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CbS-hJ-eSk">
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
@@ -58,7 +59,7 @@
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cqq-UA-GO2">
-                                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                <rect key="frame" x="0.0" y="76" width="300" height="30"/>
                                                 <state key="normal" title="log in"/>
                                                 <connections>
                                                     <action selector="loginPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wJX-uQ-FKo"/>
@@ -90,19 +91,22 @@
             </objects>
             <point key="canvasLocation" x="565" y="539"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Editor View Controller-->
         <scene sceneID="gGS-Fi-wKx">
             <objects>
-                <tableViewController storyboardIdentifier="Editor" id="e0Z-Fm-YpY" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Editor" id="e0Z-Fm-YpY" customClass="EditorViewController" customModule="JobBau" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Jsd-WX-ZQt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection headerTitle="Picture" id="CNf-J1-Ypq">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="400" id="nrL-gb-ksO">
+                                        <rect key="frame" x="0.0" y="50" width="600" height="400"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nrL-gb-ksO" id="O4i-Fz-PCu">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="399"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Missing Picture" translatesAutoresizingMaskIntoConstraints="NO" id="Fgg-de-3gu">
@@ -144,20 +148,26 @@
                             <tableViewSection headerTitle="Jobs" id="BMB-oh-5EM">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="RtV-aa-9Nl">
+                                        <rect key="frame" x="0.0" y="501" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RtV-aa-9Nl" id="ip1-gX-ApV">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="9z4-c6-Hwk">
+                                        <rect key="frame" x="0.0" y="545" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9z4-c6-Hwk" id="ZMg-ts-ESO">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PFY-AZ-xgk">
+                                        <rect key="frame" x="0.0" y="589" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PFY-AZ-xgk" id="e3d-av-BE4">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -169,6 +179,9 @@
                             <outlet property="delegate" destination="e0Z-Fm-YpY" id="Uzs-xm-Nlt"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="pictureView" destination="Fgg-de-3gu" id="DIc-2t-bSm"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4n6-f0-Hts" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -176,6 +189,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Missing Picture" width="246" height="246"/>
+        <image name="Missing Picture" width="2048" height="2048"/>
     </resources>
 </document>
