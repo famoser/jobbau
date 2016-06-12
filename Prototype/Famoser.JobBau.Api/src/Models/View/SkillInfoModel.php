@@ -13,7 +13,7 @@ use Famoser\MassPass\Models\Entities\SkillInfo;
 use Famoser\MassPass\Models\Entities\Skills;
 use Famoser\MassPass\Types\SkillTypes;
 
-class SkillInfoViewModel extends BaseViewModel
+class SkillInfoModel extends BaseModel
 {
     private $info;
     private $skills;

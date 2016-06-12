@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "profession_id": 1,
+    "name": "Maurer EFZ"
+  },
+  {
+    "id": 2,
+    "profession_id": 1,
+    "name": "Baupraktikant EBA"
+  },
+  {
+    "id": 3,
+    "profession_id": 2,
+    "name": "Grundbauer/in EFZ"
+  },
+  {
+    "id": 4,
+    "profession_id": 2,
+    "name": "Grundbaupraktikant/in EBA"
+  }
+]

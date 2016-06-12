@@ -11,7 +11,7 @@ namespace Famoser\MassPass\Models\View;
 
 use Famoser\MassPass\Models\Entities\Skills;
 
-class SkillViewModel extends BaseViewModel
+class SkillModel extends BaseModel
 {
     private $skill;
 

@@ -205,6 +205,26 @@ class DatabaseHelper
         return $this->getSingleFromDatabase($entity, "id=:id", array("id" => $id));
     }
 
+    public function insertRaw($tableName, $array)
+    {
+        $sql = "INSERT INTO " . $tableName . "(";
+        foreach ($array as $key => $val) {
+            $sql .= $key . ",";
+        }
+        $sql = substr($sql, 0, -1);
+        $sql .= ") VALUES (";
+        foreach ($array as $key => $val) {
+            $sql .= ":" . $key . ",";
+        }
+        $sql = substr($sql, 0, -1);
+        $sql .= ")";
+        $request = $this->getConnection()->prepare($sql);
+        if (!$request->execute($array)) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @param BaseEntity $entity
      * @return bool

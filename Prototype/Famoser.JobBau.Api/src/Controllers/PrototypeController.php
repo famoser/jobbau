@@ -22,8 +22,6 @@ use Famoser\MassPass\Models\Entities\Trainings;
 use Famoser\MassPass\Models\Response\SubmitResponse;
 use Famoser\MassPass\Models\View\PersonModel;
 use Famoser\MassPass\Models\View\ProfessionModel;
-use Famoser\MassPass\Models\View\ProfessionModel;
-use Famoser\MassPass\Models\View\SkillModel;
 use Famoser\MassPass\Models\View\SkillModel;
 use Famoser\MassPass\Models\View\TrainingModel;
 use Famoser\MassPass\Types\ApiErrorTypes;
@@ -164,82 +162,20 @@ class PrototypeController extends BaseController
 
     public function createSamples(Request $request, Response $response, $args)
     {
-        $helper = $this->getDatabaseHelper();
+        $helper = $this->getDatabaseHelper();;
 
-        $professions = array();
-
-        $prof = new Professions();
-        $prof->name = "Maurer";
-        $professions[] = $prof;
-
-        $prof = new Professions();
-        $prof->name = "Glaser";
-        $professions[] = $prof;
-
-        $prof = new Professions();
-        $prof->name = "Gipser";
-        $professions[] = $prof;
-
-        foreach ($professions as $profession) {
-            if (!$helper->saveToDatabase($profession)) {
-                return $this->returnApiError(ApiErrorTypes::DatabaseFailure, $response);
-            }
-
-            $train = new Trainings();
-            $train->name = $profession->name . " EFZ";
-            $train->profession_id = $profession->id;
-            if (!$helper->saveToDatabase($train)) {
-                return $this->returnApiError(ApiErrorTypes::DatabaseFailure, $response);
-            }
-
-            $train = new Trainings();
-            $train->name = $profession->name . "praktikant EBA";
-            $train->profession_id = $profession->id;
-            if (!$helper->saveToDatabase($train)) {
-                return $this->returnApiError(ApiErrorTypes::DatabaseFailure, $response);
+        $testDataFiles = glob($this->container["settings"]["asset_path"] . "/testData/*"); // get all file names
+        foreach ($testDataFiles as $file) { // iterate files
+            if (is_file($file)) {
+                $table = substr(basename($file), 0, strlen(".json") * -1);
+                $json = file_get_contents($file);
+                $list = json_decode($json, true);
+                foreach ($list as $item) {
+                    $helper->insertRaw($table, $item);
+                }
             }
         }
-
-        $skills = $helper->getFromDatabase(new Skills());
-        $skillsVm = array();
-        foreach ($skills as $skill) {
-            $skillsVm[] = new SkillModel($skill);
-        }
-        $args["skills"] = $skillsVm;
-
-        $professions = $helper->getFromDatabase(new Professions());
-        $prefessionsVm = array();
-        foreach ($professions as $profession) {
-            $prefessionsVm[] = new ProfessionModel($profession);
-        }
-        $args["professions"] = $prefessionsVm;
-
-        $trainings = $helper->getFromDatabase(new Trainings());
-        $trainingsVm = array();
-        foreach ($trainings as $training) {
-            $trainingsVm[] = new TrainingModel($training);
-        }
-        $args["trainings"] = $trainingsVm;
-
-        $persons = $helper->getFromDatabase(new Person());
-        $personViewModels = array();
-        foreach ($persons as $person) {
-            $availabilities = $helper->getFromDatabase(new Availability(), "person_id=:id", array("id" => $person->id));
-            $professionInfos = $helper->getFromDatabase(new ProfessionInfo(), "person_id=:id", array("id" => $person->id));
-            $professionInfosVm = array();
-            foreach ($professionInfos as $profs) {
-                $professionInfosVm[] = new ProfessionModel($profs, $professions, $trainings);
-            }
-            $skillInfos = $helper->getFromDatabase(new SkillInfo(), "person_id=:id", array("id" => $person->id));
-            $skillInfosVm = array();
-            foreach ($skillInfos as $skill) {
-                $skillInfosVm[] = new SkillModel($skill, $skills);
-            }
-            $personViewModels[] = new PersonModel($person, $professionInfosVm, $skillInfosVm, $availabilities);
-        }
-        $args["persons"] = $personViewModels;
-
-        return $this->renderTemplate($response, "backend/list", $args);
+        return $response->write("true");
     }
 
     public function displayEntry(Request $request, Response $response, $args)

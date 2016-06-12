@@ -13,7 +13,7 @@ use Famoser\MassPass\Models\Entities\ProfessionInfo;
 use Famoser\MassPass\Models\Entities\Professions;
 use Famoser\MassPass\Models\Entities\Trainings;
 
-class ProfessionInfoViewModel extends BaseViewModel
+class ProfessionInfoModel extends BaseModel
 {
     private $info;
     private $professions;

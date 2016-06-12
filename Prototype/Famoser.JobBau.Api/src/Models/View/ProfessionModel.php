@@ -12,9 +12,10 @@ namespace Famoser\MassPass\Models\View;
 use Famoser\MassPass\Models\Entities\Professions;
 use Famoser\MassPass\Models\Entities\Trainings;
 
-class ProfessionViewModel extends BaseViewModel
+class ProfessionModel extends BaseModel
 {
     private $profession;
+    private $trainings = array();
 
     public function __construct(Professions $profession)
     {
@@ -29,5 +30,21 @@ class ProfessionViewModel extends BaseViewModel
     public function getName()
     {
         return $this->profession->name;
+    }
+
+    /**
+     * @return Trainings[]
+     */
+    public function getTrainings()
+    {
+        return $this->trainings;
+    }
+
+    /**
+     * @param Trainings $training
+     */
+    public function addTraining(Trainings $training)
+    {
+        $this->trainings[] = $training;
     }
 }
