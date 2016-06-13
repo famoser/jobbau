@@ -16,6 +16,20 @@
 		9535D56A1D0AEC8600BD38B5 /* JobBauUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9535D5691D0AEC8600BD38B5 /* JobBauUITests.swift */; };
 		9535D5781D0B1D8900BD38B5 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9535D5771D0B1D8900BD38B5 /* EditorViewController.swift */; };
 		9535D57A1D0B856500BD38B5 /* PhotoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9535D5791D0B856500BD38B5 /* PhotoHelper.swift */; };
+		955B542A1D0DF11500C4AA43 /* Skills.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B54291D0DF11500C4AA43 /* Skills.swift */; };
+		955B542C1D0DF2BF00C4AA43 /* Trainings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B542B1D0DF2BF00C4AA43 /* Trainings.swift */; };
+		955B54311D0E1D5C00C4AA43 /* availability.json in Resources */ = {isa = PBXBuildFile; fileRef = 955B542D1D0E1D5C00C4AA43 /* availability.json */; };
+		955B54321D0E1D5C00C4AA43 /* persons.json in Resources */ = {isa = PBXBuildFile; fileRef = 955B542E1D0E1D5C00C4AA43 /* persons.json */; };
+		955B54331D0E1D5C00C4AA43 /* profession_info.json in Resources */ = {isa = PBXBuildFile; fileRef = 955B542F1D0E1D5C00C4AA43 /* profession_info.json */; };
+		955B54341D0E1D5C00C4AA43 /* skill_info.json in Resources */ = {isa = PBXBuildFile; fileRef = 955B54301D0E1D5C00C4AA43 /* skill_info.json */; };
+		955B54361D0E497800C4AA43 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B54351D0E497800C4AA43 /* DatePickerViewController.swift */; };
+		955B54381D0F058200C4AA43 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B54371D0F058200C4AA43 /* Options.swift */; };
+		955B543A1D0F095F00C4AA43 /* OptionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B54391D0F095F00C4AA43 /* OptionSelectViewController.swift */; };
+		955CACD01D0DD02800160260 /* professions.json in Resources */ = {isa = PBXBuildFile; fileRef = 955CACC91D0DD02800160260 /* professions.json */; };
+		955CACD21D0DD02800160260 /* skills.json in Resources */ = {isa = PBXBuildFile; fileRef = 955CACCB1D0DD02800160260 /* skills.json */; };
+		955CACD31D0DD02800160260 /* trainings.json in Resources */ = {isa = PBXBuildFile; fileRef = 955CACCC1D0DD02800160260 /* trainings.json */; };
+		955CACD51D0DD2B800160260 /* Professions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955CACD41D0DD2B800160260 /* Professions.swift */; };
+		955CACD91D0DE6CF00160260 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955CACD81D0DE6CF00160260 /* JSONHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +65,20 @@
 		9535D56B1D0AEC8600BD38B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9535D5771D0B1D8900BD38B5 /* EditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
 		9535D5791D0B856500BD38B5 /* PhotoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoHelper.swift; sourceTree = "<group>"; };
+		955B54291D0DF11500C4AA43 /* Skills.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skills.swift; sourceTree = "<group>"; };
+		955B542B1D0DF2BF00C4AA43 /* Trainings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trainings.swift; sourceTree = "<group>"; };
+		955B542D1D0E1D5C00C4AA43 /* availability.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = availability.json; sourceTree = "<group>"; };
+		955B542E1D0E1D5C00C4AA43 /* persons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = persons.json; sourceTree = "<group>"; };
+		955B542F1D0E1D5C00C4AA43 /* profession_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profession_info.json; sourceTree = "<group>"; };
+		955B54301D0E1D5C00C4AA43 /* skill_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = skill_info.json; sourceTree = "<group>"; };
+		955B54351D0E497800C4AA43 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		955B54371D0F058200C4AA43 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		955B54391D0F095F00C4AA43 /* OptionSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSelectViewController.swift; sourceTree = "<group>"; };
+		955CACC91D0DD02800160260 /* professions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = professions.json; sourceTree = "<group>"; };
+		955CACCB1D0DD02800160260 /* skills.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = skills.json; sourceTree = "<group>"; };
+		955CACCC1D0DD02800160260 /* trainings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trainings.json; sourceTree = "<group>"; };
+		955CACD41D0DD2B800160260 /* Professions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Professions.swift; sourceTree = "<group>"; };
+		955CACD81D0DE6CF00160260 /* JSONHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,13 +130,14 @@
 			isa = PBXGroup;
 			children = (
 				9535D5491D0AEC8600BD38B5 /* AppDelegate.swift */,
-				9535D5771D0B1D8900BD38B5 /* EditorViewController.swift */,
-				9535D54B1D0AEC8600BD38B5 /* LoginViewController.swift */,
-				9535D5791D0B856500BD38B5 /* PhotoHelper.swift */,
+				955B543B1D0F168B00C4AA43 /* View Controllers */,
+				955CACD71D0DE6C300160260 /* Helpers */,
+				955CACD61D0DE43400160260 /* Options */,
 				9535D54D1D0AEC8600BD38B5 /* Main.storyboard */,
 				9535D5501D0AEC8600BD38B5 /* Assets.xcassets */,
 				9535D5521D0AEC8600BD38B5 /* LaunchScreen.storyboard */,
 				9535D5551D0AEC8600BD38B5 /* Info.plist */,
+				955CACC51D0DD02800160260 /* testData */,
 			);
 			path = JobBau;
 			sourceTree = "<group>";
@@ -129,6 +158,51 @@
 				9535D56B1D0AEC8600BD38B5 /* Info.plist */,
 			);
 			path = JobBauUITests;
+			sourceTree = "<group>";
+		};
+		955B543B1D0F168B00C4AA43 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9535D5771D0B1D8900BD38B5 /* EditorViewController.swift */,
+				955B54351D0E497800C4AA43 /* DatePickerViewController.swift */,
+				9535D54B1D0AEC8600BD38B5 /* LoginViewController.swift */,
+				955B54391D0F095F00C4AA43 /* OptionSelectViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		955CACC51D0DD02800160260 /* testData */ = {
+			isa = PBXGroup;
+			children = (
+				955B542D1D0E1D5C00C4AA43 /* availability.json */,
+				955B542E1D0E1D5C00C4AA43 /* persons.json */,
+				955B542F1D0E1D5C00C4AA43 /* profession_info.json */,
+				955B54301D0E1D5C00C4AA43 /* skill_info.json */,
+				955CACC91D0DD02800160260 /* professions.json */,
+				955CACCB1D0DD02800160260 /* skills.json */,
+				955CACCC1D0DD02800160260 /* trainings.json */,
+			);
+			path = testData;
+			sourceTree = "<group>";
+		};
+		955CACD61D0DE43400160260 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				955CACD41D0DD2B800160260 /* Professions.swift */,
+				955B54371D0F058200C4AA43 /* Options.swift */,
+				955B54291D0DF11500C4AA43 /* Skills.swift */,
+				955B542B1D0DF2BF00C4AA43 /* Trainings.swift */,
+			);
+			name = Options;
+			sourceTree = "<group>";
+		};
+		955CACD71D0DE6C300160260 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9535D5791D0B856500BD38B5 /* PhotoHelper.swift */,
+				955CACD81D0DE6CF00160260 /* JSONHelper.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +312,13 @@
 				9535D5541D0AEC8600BD38B5 /* LaunchScreen.storyboard in Resources */,
 				9535D5511D0AEC8600BD38B5 /* Assets.xcassets in Resources */,
 				9535D54F1D0AEC8600BD38B5 /* Main.storyboard in Resources */,
+				955CACD21D0DD02800160260 /* skills.json in Resources */,
+				955B54311D0E1D5C00C4AA43 /* availability.json in Resources */,
+				955CACD01D0DD02800160260 /* professions.json in Resources */,
+				955B54321D0E1D5C00C4AA43 /* persons.json in Resources */,
+				955B54341D0E1D5C00C4AA43 /* skill_info.json in Resources */,
+				955CACD31D0DD02800160260 /* trainings.json in Resources */,
+				955B54331D0E1D5C00C4AA43 /* profession_info.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,8 +344,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9535D54C1D0AEC8600BD38B5 /* LoginViewController.swift in Sources */,
+				955B542C1D0DF2BF00C4AA43 /* Trainings.swift in Sources */,
+				955B54361D0E497800C4AA43 /* DatePickerViewController.swift in Sources */,
+				955B543A1D0F095F00C4AA43 /* OptionSelectViewController.swift in Sources */,
 				9535D5781D0B1D8900BD38B5 /* EditorViewController.swift in Sources */,
+				955CACD51D0DD2B800160260 /* Professions.swift in Sources */,
+				955CACD91D0DE6CF00160260 /* JSONHelper.swift in Sources */,
+				955B542A1D0DF11500C4AA43 /* Skills.swift in Sources */,
 				9535D57A1D0B856500BD38B5 /* PhotoHelper.swift in Sources */,
+				955B54381D0F058200C4AA43 /* Options.swift in Sources */,
 				9535D54A1D0AEC8600BD38B5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

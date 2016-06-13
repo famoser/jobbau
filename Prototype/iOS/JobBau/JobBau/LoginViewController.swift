@@ -17,8 +17,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 		let username = usernameField.text
 		let password = passwordField.text
 		// TODO process these
-		if let editor = storyboard?.instantiateViewControllerWithIdentifier("Editor") {
-			presentViewController(editor, animated: true, completion: nil)
+		if let navigator = storyboard?.instantiateViewControllerWithIdentifier("Navigation") {
+			presentViewController(navigator, animated: true, completion: nil)
 		}
 	}
 	

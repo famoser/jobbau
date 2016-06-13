@@ -1,0 +1,19 @@
+[
+  {
+    "id": 1,
+    "guid": "5e02d26c-66a0-4ca1-8f55-0b9f6aa21f2c",
+    "first_name": "Stephan",
+    "last_name": "Zweig",
+    "street_and_nr": "Via Camischolas sura 53",
+    "address_line_2": "",
+    "plz": "6036",
+    "place": "Dierikon",
+    "land": "Schweiz",
+    "email": "StephanZweig@einrot.com",
+    "mobile": "041 801 18 13",
+    "birthday_date": 418118400,
+    "picture_src": "5e02d26c-66a0-4ca1-8f55-0b9f6aa21f2c.gif",
+    "looking_for_job": true,
+    "comment": "brauche dringend einen Job, um weitere Waffenkäufe finanzieren zu können"
+  }
+]
