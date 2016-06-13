@@ -13,6 +13,8 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	@IBOutlet weak var pictureView: UIImageView!
 	@IBOutlet weak var firstNameLabel: UITextField!
 	@IBOutlet weak var lastNameLabel: UITextField!
+	@IBOutlet weak var address1Label: UITextField!
+	@IBOutlet weak var address2Label: UITextField!
 	@IBOutlet weak var zipCodeLabel: UITextField!
 	@IBOutlet weak var cityLabel: UITextField!
 	@IBOutlet weak var countryLabel: UITextField!
@@ -121,6 +123,7 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 		do {
 			let firstName = try collectTextFromField(firstNameLabel)
 			let lastName = try collectTextFromField(lastNameLabel)
+			let address1 = try collectTextFromField(address1Label)
 			let zipCode = try collectTextFromField(zipCodeLabel)
 			let city = try collectTextFromField(cityLabel)
 			let country = try collectTextFromField(countryLabel)
@@ -129,14 +132,24 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 			guard let bday = birthday else {
 				throw Errors.MissingText(labelName: "Birthday")
 			}
+			let address2 = address2Label.text
 			let comments = commentsView.text
 			let skills = Skills.sharedInstance.selected
 			let professions = Professions.sharedInstance.selected
 			let trainings = Trainings.sharedInstance.selected
 			
-			// TODO submit
-			
-			return true
+			if let url = NSURL(string: "http://api.jobbau.famoser.ch/1.0/submit") {
+				let request = NSMutableURLRequest(URL: url)
+				request.HTTPMethod = "POST"
+				
+				var jsonDict: [String: AnyObject] = [
+					"first_name": firstName,
+					"last_name": lastName,
+					"plz": zipCode
+				]
+				
+				return true
+			}
 		} catch Errors.MissingText(let name) {
 			print("Missing text in field \"\(name)\"!")
 			showAlert("Missing Input", text: "You forgot to set your \(name)")

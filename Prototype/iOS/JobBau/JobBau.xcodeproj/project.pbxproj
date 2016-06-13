@@ -25,6 +25,7 @@
 		955B54361D0E497800C4AA43 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B54351D0E497800C4AA43 /* DatePickerViewController.swift */; };
 		955B54381D0F058200C4AA43 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B54371D0F058200C4AA43 /* Options.swift */; };
 		955B543A1D0F095F00C4AA43 /* OptionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B54391D0F095F00C4AA43 /* OptionSelectViewController.swift */; };
+		955B543D1D0F2C6C00C4AA43 /* SubmissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B543C1D0F2C6C00C4AA43 /* SubmissionHelper.swift */; };
 		955CACD01D0DD02800160260 /* professions.json in Resources */ = {isa = PBXBuildFile; fileRef = 955CACC91D0DD02800160260 /* professions.json */; };
 		955CACD21D0DD02800160260 /* skills.json in Resources */ = {isa = PBXBuildFile; fileRef = 955CACCB1D0DD02800160260 /* skills.json */; };
 		955CACD31D0DD02800160260 /* trainings.json in Resources */ = {isa = PBXBuildFile; fileRef = 955CACCC1D0DD02800160260 /* trainings.json */; };
@@ -74,6 +75,7 @@
 		955B54351D0E497800C4AA43 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		955B54371D0F058200C4AA43 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		955B54391D0F095F00C4AA43 /* OptionSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSelectViewController.swift; sourceTree = "<group>"; };
+		955B543C1D0F2C6C00C4AA43 /* SubmissionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmissionHelper.swift; sourceTree = "<group>"; };
 		955CACC91D0DD02800160260 /* professions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = professions.json; sourceTree = "<group>"; };
 		955CACCB1D0DD02800160260 /* skills.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = skills.json; sourceTree = "<group>"; };
 		955CACCC1D0DD02800160260 /* trainings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trainings.json; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 		955CACD71D0DE6C300160260 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				955B543C1D0F2C6C00C4AA43 /* SubmissionHelper.swift */,
 				9535D5791D0B856500BD38B5 /* PhotoHelper.swift */,
 				955CACD81D0DE6CF00160260 /* JSONHelper.swift */,
 			);
@@ -348,6 +351,7 @@
 				955B54361D0E497800C4AA43 /* DatePickerViewController.swift in Sources */,
 				955B543A1D0F095F00C4AA43 /* OptionSelectViewController.swift in Sources */,
 				9535D5781D0B1D8900BD38B5 /* EditorViewController.swift in Sources */,
+				955B543D1D0F2C6C00C4AA43 /* SubmissionHelper.swift in Sources */,
 				955CACD51D0DD2B800160260 /* Professions.swift in Sources */,
 				955CACD91D0DE6CF00160260 /* JSONHelper.swift in Sources */,
 				955B542A1D0DF11500C4AA43 /* Skills.swift in Sources */,
