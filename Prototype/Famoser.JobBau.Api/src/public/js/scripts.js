@@ -12,6 +12,12 @@ function Initialize() {
         layoutMode: 'masonry'
     });
 
+    /*
+    var $trainingsGrid = $('.profession-filter-target').isotope({
+        itemSelector: '.filter-item',
+        layoutMode: 'vertical'
+    });
+*/
 
     var $filters = $('.filters');
     // bind filter button click
@@ -19,7 +25,12 @@ function Initialize() {
         console.log("logged");
         var filterValue = $(this).attr('data-filter');
         $grid.isotope({filter: filterValue});
-    });
+
+        /*
+        var trainingSort = $(this).attr('data-sort-training');
+        if (trainingSort)
+            $trainingsGrid.isotope({filter: filterValue});
+    */});
 
     // change is-checked class on buttons
     $filters.each(function (i, buttonGroup) {

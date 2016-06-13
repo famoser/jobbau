@@ -40,26 +40,28 @@
         <ul class="filters">
             {% for profession in professions %}
                 <li>
-                    <button class="button"
+                    <button data-sort-training="true" class="button"
                             data-filter=".{{ profession.getSortClass }}">{{ profession.getName }}</button>
                 </li>
             {% endfor %}
             <li>
-                <button class="button" data-filter="*">Alle</button>
+                <button class="button selected" data-sort-training="true" data-filter="*">Alle</button>
             </li>
         </ul>
         <hr/>
         <h3>2. Filter Ausbildung</h3>
-        <ul class="filters">
+        <ul class="filters profession-filter-target">
             {% for training in trainings %}
-                <li>
-                    <button class="button" data-filter=".{{ training.getSortClass }}">{{ training.getName }}</button>
+                <li class="filter-item  {{ training.getProfessionSortClass }}">
+                    <button class="button"
+                            data-filter=".{{ training.getSortClass }}">{{ training.getName }}</button>
                 </li>
             {% endfor %}
             <li>
-                <button class="button" data-filter="*">Alle</button>
+                <button class="button selected filter-item" data-filter="*">Alle</button>
             </li>
         </ul>
+
         <hr/>
         <h3>3. Filter Skills</h3>
         <ul class="filters">
@@ -69,7 +71,7 @@
                 </li>
             {% endfor %}
             <li>
-                <button class="button" data-filter="*">Alle</button>
+                <button class="button selected" data-filter="*">Alle</button>
             </li>
         </ul>
         <hr/>

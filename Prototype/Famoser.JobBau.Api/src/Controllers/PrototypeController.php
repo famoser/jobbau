@@ -174,9 +174,21 @@ class PrototypeController extends BaseController
         if (!$request->getAttribute("test_mode"))
             return $response->write("denied");
 
-        $helper = $this->getDatabaseHelper();;
+        $this->loadAndExecuteFolder("initializeData");
+        $this->loadAndExecuteFolder("testData");
+        return $response->write("true");
+    }
 
-        $testDataFiles = glob($this->container["settings"]["asset_path"] . "/testData/*"); // get all file names
+    public function initializeDatabase(Request $request, Response $response, $args)
+    {
+        $this->loadAndExecuteFolder("initializeData");
+        return $response->write("true");
+    }
+
+    private function loadAndExecuteFolder($relativeFolder)
+    {
+        $helper = $this->getDatabaseHelper();;
+        $testDataFiles = glob($this->container["settings"]["asset_path"] . "/" . $relativeFolder . "/*"); // get all file names
         foreach ($testDataFiles as $file) { // iterate files
             if (is_file($file)) {
                 $table = substr(basename($file), 0, strlen(".json") * -1);
@@ -188,7 +200,6 @@ class PrototypeController extends BaseController
                 }
             }
         }
-        return $response->write("true");
     }
 
     public function displayEntry(Request $request, Response $response, $args)

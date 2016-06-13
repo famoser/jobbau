@@ -22,7 +22,12 @@ class TrainingModel extends BaseModel
 
     public function getSortClass()
     {
-        return "training_".$this->training->id;
+        return "training_" . $this->training->id;
+    }
+
+    public function getProfessionSortClass()
+    {
+        return "profession_" . $this->training->profession_id;
     }
 
     public function getName()

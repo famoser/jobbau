@@ -108,6 +108,7 @@ $routes = function () use ($controllerNamespace) {
     $this->get('/entries', $controllerNamespace . 'PrototypeController:entries')->setName("entries");
     $this->get('/entries/{id:[0-9]+}', $controllerNamespace . 'PrototypeController:displayEntry')->setName("entry");
     $this->get('/entries/createSamples', $controllerNamespace . 'PrototypeController:createSamples')->setName("samples");
+    $this->get('/entries/init', $controllerNamespace . 'PrototypeController:initializeDatabase')->setName("init");
 };
 
 
