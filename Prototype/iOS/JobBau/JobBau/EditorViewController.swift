@@ -34,6 +34,8 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	var birthday: NSDate?
 	var skills, professions, trainings: [Option]?
 	
+	var uuid: String!
+	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		defer {
 			tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -108,6 +110,14 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 		super.viewDidLoad()
 		helper = PhotoHelper(delegate: self)
 		dateFormatter.dateFormat = "dd.MM.yyyy"
+		
+		let defaults = NSUserDefaults.standardUserDefaults()
+		if let id = defaults.stringForKey("UUID") {
+			uuid = id
+		} else {
+			uuid = NSUUID().UUIDString
+			defaults.setObject(uuid, forKey: "UUID")
+		}
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -117,6 +127,7 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	
 	@IBAction func submitPressed(button: UIButton) {
 		print("Submitting!")
+		submitApplication()
 	}
 	
 	func submitApplication() -> Bool {
@@ -132,24 +143,73 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 			guard let bday = birthday else {
 				throw Errors.MissingText(labelName: "Birthday")
 			}
+			let date: String = dateFormatter.stringFromDate(bday)
+			guard let pic = photo else {
+				throw Errors.MissingText(labelName: "Picture")
+			}
 			let address2 = address2Label.text
 			let comments = commentsView.text
-			let skills = Skills.sharedInstance.selected
-			let professions = Professions.sharedInstance.selected
-			let trainings = Trainings.sharedInstance.selected
 			
-			if let url = NSURL(string: "http://api.jobbau.famoser.ch/1.0/submit") {
-				let request = NSMutableURLRequest(URL: url)
-				request.HTTPMethod = "POST"
-				
-				var jsonDict: [String: AnyObject] = [
-					"first_name": firstName,
-					"last_name": lastName,
-					"plz": zipCode
-				]
-				
-				return true
+			let person: [String: AnyObject] = [
+				"guid": uuid,
+				"first_name": firstName,
+				"last_name": lastName,
+				"street_and_nr": address1,
+				"address_line_2": address2 ?? "",
+				"plz": zipCode,
+				"place": city,
+				"land": country,
+				"email": email,
+				"mobile": phone,
+				"birthday_date": date,
+				"comment": comments == "tap to edit" ? "" : comments
+			]
+			
+			var professions: [AnyObject] = []
+			for profession in Professions.sharedInstance.selected {
+				professions.append([
+					"profession_id": profession.ID,
+					"other_profession": "",
+					"training_id": 0, // TODO allow only one training per profession, and pick it here
+					"other_training": "",
+					"experience_type": 1
+					])
 			}
+			
+			var skills: [AnyObject] = []
+			for skill in Skills.sharedInstance.selected {
+				skills.append([
+					"skill_id": skill.ID,
+					"value": "true"
+					])
+			}
+			
+			var availabilities: [AnyObject] = [ // TODO implement availability choosing
+				[
+					"start_date": "24.02.1955",
+					"end_date": "05.10.2011"
+				], [
+					"start_date": "01.06.2016",
+					"end_date": ""
+				]
+			]
+			
+			let json: [String: AnyObject] = [
+				"Person": person,
+				"ProfessionInfos": professions,
+				"SkillInfos": skills,
+				"Availabilities": availabilities
+			]
+			
+			if let serialized = JSONHelper.sharedInstance.serialize(json) {
+				
+				let helper = SubmissionHelper.sharedInstance
+				
+				let data = UIImageJPEGRepresentation(pic, 1)
+				helper.sendRequest(jsonData: serialized, imageNamed: "userPicture.jpg", imageData: data!, toURL: "https://api.jobbau.famoser.ch/1.0/submit")
+				
+			}
+			
 		} catch Errors.MissingText(let name) {
 			print("Missing text in field \"\(name)\"!")
 			showAlert("Missing Input", text: "You forgot to set your \(name)")

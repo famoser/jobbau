@@ -30,4 +30,14 @@ class JSONHelper
 		}
 		return nil
 	}
+	
+	func serialize(json: [String: AnyObject]) -> NSData? {
+		do {
+			return try NSJSONSerialization.dataWithJSONObject(json, options: [])
+		} catch {
+			print("Could not serialize JSON!")
+			print(error)
+		}
+		return nil
+	}
 }
