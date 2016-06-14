@@ -31,7 +31,7 @@ class AvailabilityModel
     {
         if ($this->availability->end_date == 0)
             return "-";
-        return date("d.m.Y", $this->availability->start_date);
+        return date("d.m.Y", $this->availability->end_date);
     }
 
     /**

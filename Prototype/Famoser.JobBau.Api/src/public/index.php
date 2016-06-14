@@ -36,7 +36,7 @@ $configuration = [
         'data_path' => realpath("../../app"),
         'asset_path' => realpath("../Assets"),
         'log_path' => realpath("../../app/logs"),
-        'file_path' => realpath("../../app/files"),
+        'file_path' => realpath("../public/images/portrait"),
         'template_path' => realpath("../../app/templates"),
         'cache_path' => realpath("../../app/cache"),
         'public_path' => realpath("../public")
@@ -51,8 +51,9 @@ $c = new Container($configuration);
 $c['notFoundHandler'] = function (Container $c) {
     return function (Request $req, Response $resp) use ($c) {
         $res = new ApiResponse(false, ApiErrorTypes::RequestUriInvalid);
-        if ($c->get("settings")["debug_mode"])
+        if ($c->get("settings")["debug_mode"]) {
             $res->DebugMessage = "requested: " . $req->getRequestTarget();
+        }
 
         return $resp->withStatus(404, "endpoint not found")->withJson($res);
     };

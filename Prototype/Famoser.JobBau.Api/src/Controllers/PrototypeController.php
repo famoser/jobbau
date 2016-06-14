@@ -165,7 +165,6 @@ class PrototypeController extends BaseController
             $personViewModels[] = new PersonModel($person, $professionInfosVm, $skillInfosVm, $availabilityVms);
         }
         $args["persons"] = $personViewModels;
-        var_dump($request->getAttribute("route"));
         $args["entry_url"] = ($request->getAttribute("test_mode")) ? "entry-tests" : "entry";
 
         return $this->renderTemplate($response, "backend/list", $args);
