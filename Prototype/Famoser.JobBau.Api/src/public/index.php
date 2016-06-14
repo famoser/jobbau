@@ -95,6 +95,7 @@ $c['view'] = function (Container $c) {
 };
 
 $controllerNamespace = 'Famoser\MassPass\Controllers\\';
+$test_mode = false;
 
 $app = new App($c);
 $app->add(new JsonMiddleware());
@@ -103,17 +104,21 @@ $app->add(new ApiVersionMiddleware($c));
 $app->add(new TestsMiddleware($c));
 $app->add(new LoggingMiddleware($c));
 
-$routes = function () use ($controllerNamespace) {
-    $this->post('/submit', $controllerNamespace . 'PrototypeController:submit')->setName("submit");
-    $this->get('/entries', $controllerNamespace . 'PrototypeController:entries')->setName("entries");
-    $this->get('/entries/{id:[0-9]+}', $controllerNamespace . 'PrototypeController:displayEntry')->setName("entry");
-    $this->get('/entries/createSamples', $controllerNamespace . 'PrototypeController:createSamples')->setName("samples");
-    $this->get('/entries/init', $controllerNamespace . 'PrototypeController:initializeDatabase')->setName("init");
-};
+function makeRoutes(App &$app, $controllerNamespace, $appendix = "")
+{
+    $app->post('/submit', $controllerNamespace . 'PrototypeController:submit')->setName("submit".$appendix);
+    $app->get('/entries', $controllerNamespace . 'PrototypeController:entries')->setName("entries".$appendix);
+    $app->get('/entries/{id:[0-9]+}', $controllerNamespace . 'PrototypeController:displayEntry')->setName("entry".$appendix);
+    $app->get('/entries/createSamples', $controllerNamespace . 'PrototypeController:createSamples')->setName("samples".$appendix);
+    $app->get('/entries/init', $controllerNamespace . 'PrototypeController:initializeDatabase')->setName("init".$appendix);
+}
 
-
-$app->group("/tests/1.0", $routes);
-$app->group("/1.0", $routes);
+$app->group("/tests/1.0", function ()  use ($controllerNamespace) {
+    makeRoutes($this, $controllerNamespace, "-tests");
+});
+$app->group("/1.0", function ()  use ($controllerNamespace) {
+    makeRoutes($this, $controllerNamespace);
+});
 
 $app->get("/1.0/", $controllerNamespace . 'PublicController:index');
 

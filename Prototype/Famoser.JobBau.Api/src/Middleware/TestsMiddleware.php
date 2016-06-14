@@ -18,6 +18,11 @@ use Slim\Http\Uri;
 
 class TestsMiddleware extends BaseMiddleware
 {
+    public function __construct(ContainerInterface $container)
+    {
+        parent::__construct($container);
+    }
+
     public function __invoke(Request $request, Response $response, $next)
     {
         if (strpos($request->getRequestTarget(), "/tests") === 0) {
