@@ -60,7 +60,7 @@ table.clickable tr:hover td,
 
 .steckbrief {
     border: 1px solid #eee;
-    padding: 30px;
+    padding: 20px;
     margin: 10px;
     cursor: pointer;
 }
@@ -74,12 +74,27 @@ table.clickable tr:hover td,
     font-family: "Source Sans Pro", Helvetica, sans-serif;
     text-transform: none;
     letter-spacing: normal;
-    margin: 0 0 0.8em 0;
+    margin: 0 0 0.5em 0;
     line-height: 1.5em;
 }
 
-.steckbrief img {
+.steckbrief .img-wrapper {
     height: 200px;
-    margin: 0 auto;
+    width: 200px;
+    position: relative;
     border-radius: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.steckbrief img {
+    max-width: 100%;
+    min-height: 100%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    margin: 0;
+    padding: 0;
 }

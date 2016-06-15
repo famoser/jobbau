@@ -26,8 +26,10 @@
         <div class="filter-target">
             {% for person in persons %}
                 <div data-href="{{ path_for(entry_url, {'id': person.getPerson.id}) }}"
-                     class="{{ person.getSortClasses }} filter-item clickable col-md-3 steckbrief">
-                    <img class="img-responsive" src="/images/portraits/{{ person.getPerson.picture_src }}"/>
+                     class="{{ person.getSortClasses }} filter-item clickable col-md-2 steckbrief">
+                    <div class="img-wrapper">
+                        <img class="img-responsive" src="/images/portraits/{{ person.getPerson.picture_src }}"/>
+                    </div>
                     <h3>{{ person.getName }}</h3>
                     <p>{{ person.getProfessions }}</p>
                     <p>{{ person.getAvailability }}</p>
