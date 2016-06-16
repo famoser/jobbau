@@ -20,14 +20,13 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	@IBOutlet weak var countryLabel: UITextField!
 	@IBOutlet weak var emailLabel: UITextField!
 	@IBOutlet weak var phoneLabel: UITextField!
-	@IBOutlet weak var birthdayLabel: UILabel!
 	@IBOutlet weak var skillsLabel: UILabel!
 	@IBOutlet weak var professionsLabel: UILabel!
 	@IBOutlet weak var availabilitiesLabel: UILabel!
 	@IBOutlet weak var commentsView: UITextView!
+	@IBOutlet weak var birthdayField: UITextField!
 	
 	var photoHelper: PhotoHelper!
-	var datePickerView: UIViewController?
 	var textFields: [UITextField] = []
 	
 	var photo: UIImage?
@@ -48,19 +47,6 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 		
 		let tag = tableView.cellForRowAtIndexPath(indexPath)!.tag
 		switch tag {
-		case 50: // birthday
-			guard let pickerView = storyboard?.instantiateViewControllerWithIdentifier("DatePicker") else {
-				print("Could not create picker view")
-				return
-			}
-			let datePicker = pickerView as! DatePickerViewController
-			datePicker.previousDate = birthday
-			datePicker.datePickHandler = { (picker: UIDatePicker) in
-				self.updateBirthday(picker.date)
-			}
-			tableView.scrollToNearestSelectedRowAtScrollPosition(.Middle, animated: true)
-			presentViewController(pickerView, animated: true, completion: nil)
-			
 		case 51: // skills
 			guard let controller = storyboard?.instantiateViewControllerWithIdentifier("SkillSelector") else {
 				print("Could not create skill selector view")
@@ -99,11 +85,6 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 		}
 	}
 	
-	func updateBirthday(date: NSDate) {
-		birthday = date
-		birthdayLabel.text = date.toString()
-	}
-	
 	func updateImage() {
 		if let image = photo {
 			pictureView.image = image
@@ -121,16 +102,16 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 			cityLabel,
 			countryLabel,
 			emailLabel,
-			phoneLabel
+			phoneLabel,
+			birthdayField
 		]
 		
-		let toolbar = UIToolbar()
-		toolbar.autoresizingMask = .FlexibleHeight
-		toolbar.items = [
-			UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil),
-			UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(zipCodeDone))
-		]
-		zipCodeLabel.inputAccessoryView = toolbar
+		zipCodeLabel.inputAccessoryView = UIToolbar.doneToolbar(self, action: #selector(zipCodeDone))
+		phoneLabel.inputAccessoryView = UIToolbar.doneToolbar(self, action: #selector(phoneNumberDone))
+		
+		birthdayField.inputView = UIDatePicker.picker(self, action: #selector(birthdayPicked))
+		birthdayField.inputAccessoryView = UIToolbar.doneToolbar(self, action: #selector(birthdayDone))
+		birthdayField.valueForKey("textInputTraits")?.setValue(UIColor.clearColor(), forKey: "insertionPointColor")
 		
 		photoHelper = PhotoHelper(delegate: self)
 		
@@ -141,11 +122,6 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 			uuid = NSUUID().UUIDString
 			defaults.setObject(uuid, forKey: "UUID")
 		}
-	}
-	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
 	}
 	
 	@IBAction func submitPressed(button: UIButton) {
@@ -231,10 +207,7 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 				let confirmation = UIAlertController(title: "Submit?", message: "Are you sure you want to submit your application?", preferredStyle: .Alert)
 				confirmation.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
 				confirmation.addAction(UIAlertAction(title: "Submit", style: .Default, handler: { (action) in
-					let loader = UIAlertController()
-					let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-					indicator.startAnimating()
-					loader.setValue(indicator, forKey: "accessoryView")
+					let loader = UIAlertController(title: "Submitting…", message: nil, preferredStyle: .Alert)
 					self.presentViewController(loader, animated: true, completion: nil)
 					helper.sendRequest(jsonData: serialized, imageNamed: "userPicture.jpg", imageData: data!, toURL: "https://api.jobbau.famoser.ch/1.0/submit", success: {
 						self.showAlert("Submission Successful", text: "Thank you!", forDuration: 3)
@@ -268,16 +241,31 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 		throw Errors.MissingText(labelName: name)
 	}
 	
+	// birthday picker delegate methods
+	
+	func birthdayPicked(picker: UIDatePicker) {
+		birthday = picker.date
+		birthdayField.text = picker.date.toString()
+	}
+	
+	func birthdayDone() {
+		textFieldShouldReturn(birthdayField)
+	}
+	
 	// text field delegate methods
 	
 	func zipCodeDone() {
 		textFieldShouldReturn(zipCodeLabel)
 	}
 	
+	func phoneNumberDone() {
+		textFieldShouldReturn(phoneLabel)
+	}
+	
 	func textFieldShouldReturn(textField: UITextField) -> Bool {
 		textField.resignFirstResponder()
 		if let index = textFields.indexOf(textField) {
-			if index < textFields.count {
+			if index < textFields.count - 1 {
 				textFields[index + 1].becomeFirstResponder()
 			}
 		}
@@ -304,10 +292,6 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	func viewController() -> UIViewController {
 		return self
 	}
-}
-
-enum Errors: ErrorType {
-	case MissingText(labelName: String)
 }
 
 extension UIViewController {
@@ -338,5 +322,26 @@ extension NSDate {
 		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
 		
 		return dateFormatter.stringFromDate(self)
+	}
+}
+
+extension UIToolbar {
+	static func doneToolbar(controller: UIViewController, action: Selector) -> UIToolbar {
+		let toolbar = UIToolbar()
+		toolbar.autoresizingMask = .FlexibleHeight
+		toolbar.items = [
+			UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil),
+			UIBarButtonItem(barButtonSystemItem: .Done, target: controller, action: action)
+		]
+		return toolbar
+	}
+}
+
+extension UIDatePicker {
+	static func picker(controller: UIViewController, action: Selector) -> UIDatePicker {
+		let picker = UIDatePicker()
+		picker.datePickerMode = .Date
+		picker.addTarget(controller, action: action, forControlEvents: .ValueChanged)
+		return picker
 	}
 }

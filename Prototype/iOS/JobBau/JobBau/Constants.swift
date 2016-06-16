@@ -9,11 +9,15 @@
 import Foundation
 
 class Constants {
-	static let types: [Int: String] = [
+	static let experienceTypes: [Int: String] = [
 		0: "None",
 		1: "1-3 years",
 		2: "3-5 years",
 		3: "5-10 years",
 		4: "more than 10 years"
 	]
+}
+
+enum Errors: ErrorType {
+	case MissingText(labelName: String)
 }

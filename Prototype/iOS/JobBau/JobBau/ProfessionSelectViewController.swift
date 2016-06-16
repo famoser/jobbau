@@ -49,9 +49,10 @@ class ProfessionSelectViewController: UITableViewController {
 		} else {
 			let nextHandler = {
 				let sheet = UIAlertController(title: "Experience", message: "How many years have you worked in the field?", preferredStyle: .ActionSheet)
-				for exp in Constants.types {
-					sheet.addAction(UIAlertAction(title: exp.1, style: .Default, handler: { (action) in
-						profession.experienceType = exp.0
+				let types = Constants.experienceTypes
+				for i in 0 ..< types.count {
+					sheet.addAction(UIAlertAction(title: types[i], style: .Default, handler: { (action) in
+						profession.experienceType = i
 						cell?.accessoryType = .Checkmark
 						self.professions.selected.append(profession)
 					}))

@@ -44,7 +44,15 @@ class AvailabilitySelectViewController: UITableViewController {
 			EditorViewController.availabilities[indexPath.row] = (start!, end!)
 			self.tableView.reloadData()
 		}
+		editor.removalHandler = {
+			EditorViewController.availabilities.removeAtIndex(indexPath.row)
+			self.tableView.reloadData()
+		}
 		navigationController?.pushViewController(editor, animated: true)
+	}
+	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		return 79
 	}
 	
 	@IBAction func addPressed(sender: UIBarButtonItem) {
