@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextViewDelegate {
+class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextViewDelegate, UITextFieldDelegate {
 	
 	@IBOutlet weak var pictureView: UIImageView!
 	@IBOutlet weak var firstNameLabel: UITextField!
@@ -23,16 +23,16 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	@IBOutlet weak var birthdayLabel: UILabel!
 	@IBOutlet weak var skillsLabel: UILabel!
 	@IBOutlet weak var professionsLabel: UILabel!
-	@IBOutlet weak var trainingsLabel: UILabel!
+	@IBOutlet weak var availabilitiesLabel: UILabel!
 	@IBOutlet weak var commentsView: UITextView!
 	
-	var helper: PhotoHelper!
+	var photoHelper: PhotoHelper!
 	var datePickerView: UIViewController?
-	let dateFormatter = NSDateFormatter()
+	var textFields: [UITextField] = []
 	
 	var photo: UIImage?
 	var birthday: NSDate?
-	var skills, professions, trainings: [Option]?
+	static var availabilities: [(NSDate, NSDate)] = []
 	
 	var uuid: String!
 	
@@ -43,7 +43,7 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 		
 		// picture
 		if indexPath.section == 0 {
-			helper.display()
+			photoHelper.display()
 		}
 		
 		let tag = tableView.cellForRowAtIndexPath(indexPath)!.tag
@@ -61,33 +61,37 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 			tableView.scrollToNearestSelectedRowAtScrollPosition(.Middle, animated: true)
 			presentViewController(pickerView, animated: true, completion: nil)
 			
-		case 51 ... 53: // skills/professions/trainings
-			guard let controller = storyboard?.instantiateViewControllerWithIdentifier("OptionSelector") else {
-				print("Could not create option selector view")
+		case 51: // skills
+			guard let controller = storyboard?.instantiateViewControllerWithIdentifier("SkillSelector") else {
+				print("Could not create skill selector view")
 				return
 			}
-			var options: Options
-			var handler: ([Option] -> Void)
-			switch tag {
-			case 51: // skills
-				options = Skills.sharedInstance
-				handler = { (selected) in
-					self.skillsLabel.text = "\(selected.count) selected"
-				}
-			case 52: // professions
-				options = Professions.sharedInstance
-				handler = { (selected) in
-					self.professionsLabel.text = "\(selected.count) selected"
-				}
-			default: // trainings
-				options = Trainings.sharedInstance
-				handler = { (selected) in
-					self.trainingsLabel.text = "\(selected.count) selected"
-				}
+			let selector = controller as! SkillSelectViewController
+			selector.completionHandler = {
+				self.skillsLabel.text = "\(Skills.sharedInstance.selected.count) selected"
 			}
-			let selector = controller as! OptionSelectViewController
-			selector.options = options
-			selector.completionHandler = handler
+			navigationController?.pushViewController(controller, animated: true)
+			
+		case 52: // professions
+			guard let controller = storyboard?.instantiateViewControllerWithIdentifier("ProfessionSelector") else {
+				print("Could not create profession selector view")
+				return
+			}
+			let selector = controller as! ProfessionSelectViewController
+			selector.completionHandler = {
+				self.professionsLabel.text = "\(Professions.sharedInstance.selected.count) selected"
+			}
+			navigationController?.pushViewController(controller, animated: true)
+			
+		case 53: // availabilities
+			guard let controller = storyboard?.instantiateViewControllerWithIdentifier("AvailabilitySelector") else {
+				print("Could not create availability selector view")
+				return
+			}
+			let selector = controller as! AvailabilitySelectViewController
+			selector.completionHandler = {
+				self.availabilitiesLabel.text = "\(EditorViewController.availabilities.count) selected"
+			}
 			navigationController?.pushViewController(controller, animated: true)
 			
 		default:
@@ -97,7 +101,7 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	
 	func updateBirthday(date: NSDate) {
 		birthday = date
-		birthdayLabel.text = dateFormatter.stringFromDate(date)
+		birthdayLabel.text = date.toString()
 	}
 	
 	func updateImage() {
@@ -108,8 +112,27 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		helper = PhotoHelper(delegate: self)
-		dateFormatter.dateFormat = "dd.MM.yyyy"
+		textFields = [
+			firstNameLabel,
+			lastNameLabel,
+			address1Label,
+			address2Label,
+			zipCodeLabel,
+			cityLabel,
+			countryLabel,
+			emailLabel,
+			phoneLabel
+		]
+		
+		let toolbar = UIToolbar()
+		toolbar.autoresizingMask = .FlexibleHeight
+		toolbar.items = [
+			UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil),
+			UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(zipCodeDone))
+		]
+		zipCodeLabel.inputAccessoryView = toolbar
+		
+		photoHelper = PhotoHelper(delegate: self)
 		
 		let defaults = NSUserDefaults.standardUserDefaults()
 		if let id = defaults.stringForKey("UUID") {
@@ -132,6 +155,9 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	
 	func submitApplication() -> Bool {
 		do {
+			guard let pic = photo else {
+				throw Errors.MissingText(labelName: "Picture")
+			}
 			let firstName = try collectTextFromField(firstNameLabel)
 			let lastName = try collectTextFromField(lastNameLabel)
 			let address1 = try collectTextFromField(address1Label)
@@ -143,10 +169,7 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 			guard let bday = birthday else {
 				throw Errors.MissingText(labelName: "Birthday")
 			}
-			let date: String = dateFormatter.stringFromDate(bday)
-			guard let pic = photo else {
-				throw Errors.MissingText(labelName: "Picture")
-			}
+			let date: String = bday.toISO8601()
 			let address2 = address2Label.text
 			let comments = commentsView.text
 			
@@ -169,10 +192,10 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 			for profession in Professions.sharedInstance.selected {
 				professions.append([
 					"profession_id": profession.ID,
-					"other_profession": "",
-					"training_id": 0, // TODO allow only one training per profession, and pick it here
-					"other_training": "",
-					"experience_type": 1
+					"other_profession": profession.ID == -1 ? "true" : "",
+					"training_id": profession.selectedTraining?.name ?? "",
+					"other_training": profession.selectedTraining?.name == nil ? "true" : "",
+					"experience_type": profession.experienceType
 					])
 			}
 			
@@ -184,21 +207,19 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 					])
 			}
 			
-			var availabilities: [AnyObject] = [ // TODO implement availability choosing
-				[
-					"start_date": "24.02.1955",
-					"end_date": "05.10.2011"
-				], [
-					"start_date": "01.06.2016",
-					"end_date": ""
-				]
-			]
+			var availbs: [AnyObject] = []
+			for availb in EditorViewController.availabilities {
+				availbs.append([
+					"start_date": availb.0.toISO8601(),
+					"end_date": availb.1.toISO8601()
+					])
+			}
 			
 			let json: [String: AnyObject] = [
 				"Person": person,
 				"ProfessionInfos": professions,
 				"SkillInfos": skills,
-				"Availabilities": availabilities
+				"Availabilities": availbs
 			]
 			
 			if let serialized = JSONHelper.sharedInstance.serialize(json) {
@@ -206,13 +227,30 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 				let helper = SubmissionHelper.sharedInstance
 				
 				let data = UIImageJPEGRepresentation(pic, 1)
-				helper.sendRequest(jsonData: serialized, imageNamed: "userPicture.jpg", imageData: data!, toURL: "https://api.jobbau.famoser.ch/1.0/submit")
+				
+				let confirmation = UIAlertController(title: "Submit?", message: "Are you sure you want to submit your application?", preferredStyle: .Alert)
+				confirmation.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+				confirmation.addAction(UIAlertAction(title: "Submit", style: .Default, handler: { (action) in
+					let loader = UIAlertController()
+					let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+					indicator.startAnimating()
+					loader.setValue(indicator, forKey: "accessoryView")
+					self.presentViewController(loader, animated: true, completion: nil)
+					helper.sendRequest(jsonData: serialized, imageNamed: "userPicture.jpg", imageData: data!, toURL: "https://api.jobbau.famoser.ch/1.0/submit", success: {
+						self.showAlert("Submission Successful", text: "Thank you!", forDuration: 3)
+						loader.dismissViewControllerAnimated(true, completion: nil)
+					}) {
+						self.showAlert("Submission Failed", text: "Please try again later or contact support.", forDuration: 5)
+						loader.dismissViewControllerAnimated(true, completion: nil)
+					}
+				}))
+				presentViewController(confirmation, animated: true, completion: nil)
 				
 			}
 			
 		} catch Errors.MissingText(let name) {
 			print("Missing text in field \"\(name)\"!")
-			showAlert("Missing Input", text: "You forgot to set your \(name)")
+			showAlert("Missing Input", text: "You forgot to set your \(name)", forDuration: 0.5)
 		} catch {
 			print("There was another error submitting the application!")
 			print(error)
@@ -222,19 +260,29 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	
 	func collectTextFromField(field: UITextField) throws -> String {
 		if let text = field.text {
-			return text
+			if !text.isEmpty {
+				return text
+			}
 		}
 		let name = field.placeholder ?? "[field name]"
 		throw Errors.MissingText(labelName: name)
 	}
 	
-	func showAlert(title: String, text: String) {
-		let alert = UIAlertController(title: title, message: text, preferredStyle: .Alert)
-		presentViewController(alert, animated: true) {
-			UIView.animateWithDuration(1) {
-				alert.dismissViewControllerAnimated(true, completion: nil)
+	// text field delegate methods
+	
+	func zipCodeDone() {
+		textFieldShouldReturn(zipCodeLabel)
+	}
+	
+	func textFieldShouldReturn(textField: UITextField) -> Bool {
+		textField.resignFirstResponder()
+		if let index = textFields.indexOf(textField) {
+			if index < textFields.count {
+				textFields[index + 1].becomeFirstResponder()
 			}
 		}
+		
+		return false
 	}
 	
 	// comment text view delegate methods
@@ -260,4 +308,35 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 
 enum Errors: ErrorType {
 	case MissingText(labelName: String)
+}
+
+extension UIViewController {
+	func showAlert(title: String, text: String?, forDuration duration: NSTimeInterval) {
+		let alert = UIAlertController(title: title, message: text, preferredStyle: .Alert)
+		presentViewController(alert, animated: true) {
+			UIView.animateWithDuration(duration, animations: {
+				alert.view.alpha = 0.9999999 // dummy animation for an easy wait
+			}) { (success) in
+				alert.dismissViewControllerAnimated(true, completion: nil)
+			}
+		}
+	}
+}
+
+extension NSDate {
+	func toString() -> String {
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "dd.MM.yyyy"
+		
+		return dateFormatter.stringFromDate(self)
+	}
+	
+	func toISO8601() -> String {
+		let dateFormatter = NSDateFormatter()
+		let enUSPosixLocale = NSLocale(localeIdentifier: "en_US_POSIX")
+		dateFormatter.locale = enUSPosixLocale
+		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+		
+		return dateFormatter.stringFromDate(self)
+	}
 }

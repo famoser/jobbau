@@ -8,49 +8,47 @@
 
 import Foundation
 
-class Trainings: Options {
+class Trainings {
 	
-	private static let shared = Trainings()
-	override class var sharedInstance: Options {
-		return shared
-	}
+	private static let sharedInstance = Trainings()
 	
-	override var jsonName: String {
+	var trainings: [Int: [Training]] = [:]
+	
+	var jsonName: String {
 		return "trainings"
 	}
 	
-	override func optionFromDict(dict: [String: AnyObject]) -> Option {
+	init() {
+		if let json = JSONHelper.sharedInstance.loadJSON(jsonName) {
+			for dict in json {
+				let new = optionFromDict(dict)
+				let id = new.professionID
+				if trainings[id] != nil {
+					trainings[id]?.append(new)
+				} else {
+					trainings[id] = [new]
+				}
+			}
+		}
+	}
+	
+	func optionFromDict(dict: [String: AnyObject]) -> Training {
 		let id = dict["id"] as! Int
 		let p_id = dict["profession_id"] as! Int
 		let name = dict["name"] as! String
 		return Training(ID: id, professionID: p_id, name: name)
 	}
-	
-	override func availableOptions() -> [Option] { // only allow trainings for selected professions
-		
-		var allowed: [Training] = []
-		
-		let professions = Professions.sharedInstance.selected
-		
-		for option in options {
-			let training = option as! Training
-			for profession in professions {
-				if training.professionID == profession.ID {
-					allowed.append(training)
-				}
-			}
-		}
-		
-		return allowed
-	}
 }
 
-class Training: Option {
+class Training {
 	
+	var ID: Int
 	var professionID: Int
+	var name: String
 	
 	init(ID id: Int, professionID pID: Int, name n: String) {
+		ID = id
 		professionID = pID
-		super.init(ID: id, name: n)
+		name = n
 	}
 }

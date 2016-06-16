@@ -8,14 +8,39 @@
 
 import Foundation
 
-class Skills: Options {
+class Skills {
 	
-	private static let shared = Skills()
-	override class var sharedInstance: Options {
-		return shared
+	static let sharedInstance = Skills()
+	var skills: [Skill] = []
+	var selected: [Skill] = []
+	
+	init() {
+		if let json = JSONHelper.sharedInstance.loadJSON("skills") {
+			for dict in json {
+				skills.append(skillFromDict(dict))
+			}
+		}
+		skills.sortInPlace() { $0.name.lowercaseString < $1.name.lowercaseString }
 	}
 	
-	override var jsonName: String {
-		return "skills"
+	func skillFromDict(dict: [String: AnyObject]) -> Skill {
+		let id = dict["id"] as! Int
+		let name = dict["name"] as! String
+		return Skill(ID: id, name: name)
 	}
+}
+
+class Skill: Equatable {
+	
+	var ID: Int
+	var name: String
+	
+	init(ID id: Int, name n: String) {
+		ID = id
+		name = n
+	}
+}
+
+func ==(left: Skill, right: Skill) -> Bool {
+	return left.ID == right.ID
 }

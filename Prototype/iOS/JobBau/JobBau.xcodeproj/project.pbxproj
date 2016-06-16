@@ -23,8 +23,7 @@
 		955B54331D0E1D5C00C4AA43 /* profession_info.json in Resources */ = {isa = PBXBuildFile; fileRef = 955B542F1D0E1D5C00C4AA43 /* profession_info.json */; };
 		955B54341D0E1D5C00C4AA43 /* skill_info.json in Resources */ = {isa = PBXBuildFile; fileRef = 955B54301D0E1D5C00C4AA43 /* skill_info.json */; };
 		955B54361D0E497800C4AA43 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B54351D0E497800C4AA43 /* DatePickerViewController.swift */; };
-		955B54381D0F058200C4AA43 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B54371D0F058200C4AA43 /* Options.swift */; };
-		955B543A1D0F095F00C4AA43 /* OptionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B54391D0F095F00C4AA43 /* OptionSelectViewController.swift */; };
+		955B543A1D0F095F00C4AA43 /* SkillSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B54391D0F095F00C4AA43 /* SkillSelectViewController.swift */; };
 		955B543D1D0F2C6C00C4AA43 /* SubmissionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955B543C1D0F2C6C00C4AA43 /* SubmissionHelper.swift */; };
 		955CACD01D0DD02800160260 /* professions.json in Resources */ = {isa = PBXBuildFile; fileRef = 955CACC91D0DD02800160260 /* professions.json */; };
 		955CACD21D0DD02800160260 /* skills.json in Resources */ = {isa = PBXBuildFile; fileRef = 955CACCB1D0DD02800160260 /* skills.json */; };
@@ -61,6 +60,10 @@
 		957D68541D0F4CA4007865D2 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 957D68361D0F4CA4007865D2 /* UIRefreshControl+AFNetworking.m */; };
 		957D68551D0F4CA4007865D2 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 957D68381D0F4CA4007865D2 /* UIWebView+AFNetworking.m */; };
 		957D68561D0F4CA4007865D2 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 957D68381D0F4CA4007865D2 /* UIWebView+AFNetworking.m */; };
+		95B8853A1D10B58400AA8AB9 /* ProfessionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B885391D10B58400AA8AB9 /* ProfessionSelectViewController.swift */; };
+		95B8853C1D10C8F500AA8AB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8853B1D10C8F500AA8AB9 /* Constants.swift */; };
+		95B8853E1D10CF9A00AA8AB9 /* AvailabilitySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8853D1D10CF9A00AA8AB9 /* AvailabilitySelectViewController.swift */; };
+		95B885401D10D0B700AA8AB9 /* AvailabilityEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8853F1D10D0B700AA8AB9 /* AvailabilityEditViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,8 +106,7 @@
 		955B542F1D0E1D5C00C4AA43 /* profession_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = profession_info.json; sourceTree = "<group>"; };
 		955B54301D0E1D5C00C4AA43 /* skill_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = skill_info.json; sourceTree = "<group>"; };
 		955B54351D0E497800C4AA43 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
-		955B54371D0F058200C4AA43 /* Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
-		955B54391D0F095F00C4AA43 /* OptionSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSelectViewController.swift; sourceTree = "<group>"; };
+		955B54391D0F095F00C4AA43 /* SkillSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillSelectViewController.swift; sourceTree = "<group>"; };
 		955B543C1D0F2C6C00C4AA43 /* SubmissionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SubmissionHelper.swift; sourceTree = "<group>"; tabWidth = 4; wrapsLines = 0; };
 		955CACC91D0DD02800160260 /* professions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = professions.json; sourceTree = "<group>"; };
 		955CACCB1D0DD02800160260 /* skills.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = skills.json; sourceTree = "<group>"; };
@@ -145,6 +147,10 @@
 		957D68371D0F4CA4007865D2 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		957D68381D0F4CA4007865D2 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		957D68581D0F4D61007865D2 /* Obj-BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Obj-BridgingHeader.h"; sourceTree = "<group>"; };
+		95B885391D10B58400AA8AB9 /* ProfessionSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfessionSelectViewController.swift; sourceTree = "<group>"; };
+		95B8853B1D10C8F500AA8AB9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		95B8853D1D10CF9A00AA8AB9 /* AvailabilitySelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailabilitySelectViewController.swift; sourceTree = "<group>"; };
+		95B8853F1D10D0B700AA8AB9 /* AvailabilityEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailabilityEditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,10 +238,13 @@
 		955B543B1D0F168B00C4AA43 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				95B8853D1D10CF9A00AA8AB9 /* AvailabilitySelectViewController.swift */,
+				95B8853F1D10D0B700AA8AB9 /* AvailabilityEditViewController.swift */,
 				9535D5771D0B1D8900BD38B5 /* EditorViewController.swift */,
 				955B54351D0E497800C4AA43 /* DatePickerViewController.swift */,
 				9535D54B1D0AEC8600BD38B5 /* LoginViewController.swift */,
-				955B54391D0F095F00C4AA43 /* OptionSelectViewController.swift */,
+				955B54391D0F095F00C4AA43 /* SkillSelectViewController.swift */,
+				95B885391D10B58400AA8AB9 /* ProfessionSelectViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -258,7 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				955CACD41D0DD2B800160260 /* Professions.swift */,
-				955B54371D0F058200C4AA43 /* Options.swift */,
+				95B8853B1D10C8F500AA8AB9 /* Constants.swift */,
 				955B54291D0DF11500C4AA43 /* Skills.swift */,
 				955B542B1D0DF2BF00C4AA43 /* Trainings.swift */,
 			);
@@ -385,7 +394,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Julian Dunskus";
 				TargetAttributes = {
 					9535D5451D0AEC8600BD38B5 = {
@@ -470,17 +479,21 @@
 				955B542C1D0DF2BF00C4AA43 /* Trainings.swift in Sources */,
 				955B54361D0E497800C4AA43 /* DatePickerViewController.swift in Sources */,
 				957D68511D0F4CA4007865D2 /* UIProgressView+AFNetworking.m in Sources */,
-				955B543A1D0F095F00C4AA43 /* OptionSelectViewController.swift in Sources */,
+				955B543A1D0F095F00C4AA43 /* SkillSelectViewController.swift in Sources */,
 				957D68491D0F4CA4007865D2 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				9535D5781D0B1D8900BD38B5 /* EditorViewController.swift in Sources */,
 				957D684D1D0F4CA4007865D2 /* UIButton+AFNetworking.m in Sources */,
+				95B8853C1D10C8F500AA8AB9 /* Constants.swift in Sources */,
 				955B543D1D0F2C6C00C4AA43 /* SubmissionHelper.swift in Sources */,
 				957D68471D0F4CA4007865D2 /* AFImageDownloader.m in Sources */,
 				957D68551D0F4CA4007865D2 /* UIWebView+AFNetworking.m in Sources */,
 				957D683F1D0F4CA4007865D2 /* AFURLRequestSerialization.m in Sources */,
+				95B8853E1D10CF9A00AA8AB9 /* AvailabilitySelectViewController.swift in Sources */,
 				955CACD51D0DD2B800160260 /* Professions.swift in Sources */,
 				957D68451D0F4CA4007865D2 /* AFAutoPurgingImageCache.m in Sources */,
+				95B8853A1D10B58400AA8AB9 /* ProfessionSelectViewController.swift in Sources */,
 				957D68431D0F4CA4007865D2 /* AFURLSessionManager.m in Sources */,
+				95B885401D10D0B700AA8AB9 /* AvailabilityEditViewController.swift in Sources */,
 				955CACD91D0DE6CF00160260 /* JSONHelper.swift in Sources */,
 				957D684B1D0F4CA4007865D2 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				955B542A1D0DF11500C4AA43 /* Skills.swift in Sources */,
@@ -489,7 +502,6 @@
 				957D68531D0F4CA4007865D2 /* UIRefreshControl+AFNetworking.m in Sources */,
 				957D684F1D0F4CA4007865D2 /* UIImageView+AFNetworking.m in Sources */,
 				957D683B1D0F4CA4007865D2 /* AFNetworkReachabilityManager.m in Sources */,
-				955B54381D0F058200C4AA43 /* Options.swift in Sources */,
 				9535D54A1D0AEC8600BD38B5 /* AppDelegate.swift in Sources */,
 				957D68391D0F4CA4007865D2 /* AFHTTPSessionManager.m in Sources */,
 			);
@@ -668,6 +680,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.juliand665.JobBau;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Obj-BridgingHeader.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
@@ -693,6 +706,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.juliand665.JobBauTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JobBau.app/JobBau";
 			};
@@ -717,6 +731,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.juliand665.JobBauUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = JobBau;
 			};

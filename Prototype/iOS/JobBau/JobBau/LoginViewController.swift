@@ -14,11 +14,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 	@IBOutlet weak var passwordField: UITextField!
 	
 	@IBAction func loginPressed(button: UIButton?) {
-		let username = usernameField.text
-		let password = passwordField.text
-		// TODO process these
-		if let navigator = storyboard?.instantiateViewControllerWithIdentifier("Navigation") {
-			presentViewController(navigator, animated: true, completion: nil)
+		//let username = usernameField.text
+		if let password = passwordField.text {
+			if password == "jobbau01" {
+				if let navigator = storyboard?.instantiateViewControllerWithIdentifier("Navigation") {
+					presentViewController(navigator, animated: true, completion: nil)
+				}
+			} else {
+				showAlert("Incorrect Password!", text: nil, forDuration: 2)
+			}
 		}
 	}
 	

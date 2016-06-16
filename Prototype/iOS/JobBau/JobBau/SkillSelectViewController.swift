@@ -8,32 +8,31 @@
 
 import UIKit
 
-class OptionSelectViewController: UITableViewController {
+class SkillSelectViewController: UITableViewController {
 	
-	var options: Options!
-	var optionList: [Option]!
+	var skills: Skills!
 	
-	var completionHandler: ([Option] -> Void)?
+	var completionHandler: (() -> Void)?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		optionList = options.availableOptions()
+		skills = Skills.sharedInstance
 	}
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return optionList.count
+		return skills.skills.count
 	}
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier("Option")!
-		let option = optionList[indexPath.row]
-		if options.selected.contains(option) {
+		let skill = skills.skills[indexPath.row]
+		if skills.selected.contains(skill) {
 			cell.accessoryType = .Checkmark
 		} else {
 			cell.accessoryType = .None
 		}
 		let label = cell.viewWithTag(10) as! UILabel
-		label.text = option.name
+		label.text = skill.name
 		return cell
 	}
 	
@@ -42,19 +41,19 @@ class OptionSelectViewController: UITableViewController {
 			tableView.deselectRowAtIndexPath(indexPath, animated: true)
 		}
 		let cell = tableView.cellForRowAtIndexPath(indexPath)
-		let option = optionList[indexPath.row]
-		let possibleIndex = options.selected.indexOf(option)
+		let skill = skills.skills[indexPath.row]
+		let possibleIndex = skills.selected.indexOf(skill)
 		if let index = possibleIndex {
 			cell?.accessoryType = .None
-			options.selected.removeAtIndex(index)
+			skills.selected.removeAtIndex(index)
 		} else {
 			cell?.accessoryType = .Checkmark
-			options.selected.append(option)
+			skills.selected.append(skill)
 		}
 	}
 	
 	override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
-		completionHandler?(options.selected)
+		completionHandler?()
 	}
 }

@@ -23,6 +23,10 @@ class DatePickerViewController: UIViewController
 		}
 	}
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+	}
+	
 	@IBAction func datePicked(picker: UIDatePicker) {
 		datePickHandler?(picker)
 	}
