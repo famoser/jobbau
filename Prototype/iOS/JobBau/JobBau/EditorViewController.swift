@@ -28,6 +28,7 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	
 	var photoHelper: PhotoHelper!
 	var textFields: [UITextField] = []
+	let defaults = NSUserDefaults.standardUserDefaults()
 	
 	var photo: UIImage?
 	var birthday: NSDate?
@@ -93,6 +94,7 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
 		textFields = [
 			firstNameField,
 			lastNameField,
@@ -106,21 +108,37 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 			birthdayField
 		]
 		
-		zipCodeField.inputAccessoryView = UIToolbar.doneToolbar(self, action: #selector(zipCodeDone))
-		phoneField.inputAccessoryView = UIToolbar.doneToolbar(self, action: #selector(phoneNumberDone))
+		zipCodeField.addToolbar()
+		phoneField.addToolbar()
 		
-		birthdayField.inputView = UIDatePicker.picker(self, action: #selector(birthdayPicked))
-		birthdayField.inputAccessoryView = UIToolbar.doneToolbar(self, action: #selector(birthdayDone))
-		birthdayField.valueForKey("textInputTraits")?.setValue(UIColor.clearColor(), forKey: "insertionPointColor")
+		birthdayField.makeDateField(dateChanged: (self, #selector(birthdayPicked)))
 		
 		photoHelper = PhotoHelper(delegate: self)
 		
-		let defaults = NSUserDefaults.standardUserDefaults()
+		loadFromDefaults()
+	}
+	
+	func loadFromDefaults() {
+		/* TODO use this later, atm we want a new one for every submission
 		if let id = defaults.stringForKey("UUID") {
-			uuid = id
+		uuid = id
 		} else {
-			uuid = NSUUID().UUIDString
-			defaults.setObject(uuid, forKey: "UUID")
+		uuid = NSUUID().UUIDString
+		defaults.setObject(uuid, forKey: "UUID")
+		}
+		*/
+		uuid = NSUUID().UUIDString
+		
+		for field in textFields {
+			if field == birthdayField {
+				continue
+			}
+			if let key = field.placeholder {
+				field.text = defaults.stringForKey(key)
+			}
+		}
+		if let text = defaults.stringForKey("Comments") {
+			commentsView.text = text
 		}
 	}
 	
@@ -164,13 +182,13 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 				"comment": comments == "tap to edit" ? "" : comments
 			]
 			
-			var professions: [AnyObject] = []
+			var professions: [[String: AnyObject]] = []
 			for profession in Professions.sharedInstance.selected {
 				professions.append([
 					"profession_id": profession.ID,
-					"other_profession": profession.ID == -1 ? "true" : "",
-					"training_id": profession.selectedTraining?.name ?? "",
-					"other_training": profession.selectedTraining?.name == nil ? "true" : "",
+					"other_profession": profession.name,
+					"training_id": profession.selectedTraining?.ID ?? "",
+					"other_training": profession.selectedTraining?.name ?? "",
 					"experience_type": profession.experienceType
 					])
 			}
@@ -210,11 +228,11 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 					let loader = UIAlertController(title: "Submitting…", message: nil, preferredStyle: .Alert)
 					self.presentViewController(loader, animated: true, completion: nil)
 					helper.sendRequest(jsonData: serialized, imageNamed: "userPicture.jpg", imageData: data!, toURL: "https://api.jobbau.famoser.ch/1.0/submit", success: {
-						self.showAlert("Submission Successful", text: "Thank you!", forDuration: 3)
 						loader.dismissViewControllerAnimated(true, completion: nil)
+						self.showAlert("Submission Successful", text: "Thank you!", forDuration: 2)
 					}) {
-						self.showAlert("Submission Failed", text: "Please try again later or contact support.", forDuration: 5)
 						loader.dismissViewControllerAnimated(true, completion: nil)
+						self.showAlert("Submission Failed", text: "Please try again later or contact support.", forDuration: 4)
 					}
 				}))
 				presentViewController(confirmation, animated: true, completion: nil)
@@ -245,22 +263,9 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	
 	func birthdayPicked(picker: UIDatePicker) {
 		birthday = picker.date
-		birthdayField.text = picker.date.toString()
-	}
-	
-	func birthdayDone() {
-		textFieldShouldReturn(birthdayField)
 	}
 	
 	// text field delegate methods
-	
-	func zipCodeDone() {
-		textFieldShouldReturn(zipCodeField)
-	}
-	
-	func phoneNumberDone() {
-		textFieldShouldReturn(phoneField)
-	}
 	
 	func textFieldShouldReturn(textField: UITextField) -> Bool {
 		textField.resignFirstResponder()
@@ -273,6 +278,16 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 		return false
 	}
 	
+	func textFieldDidEndEditing(textField: UITextField) {
+		if textField == birthdayField { // don't store the birthday, since it's a date
+			return
+		}
+		
+		if let key = textField.placeholder, text = textField.text {
+			defaults.setObject(text, forKey: key)
+		}
+	}
+	
 	// comment text view delegate methods
 	
 	func textViewDidBeginEditing(textView: UITextView) {
@@ -280,6 +295,10 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 			textView.text = ""
 			textView.tag = 1
 		}
+	}
+	
+	func textViewDidEndEditing(textView: UITextView) {
+		defaults.setObject(textView.text, forKey: "Comments")
 	}
 	
 	// photo helper delegate methods
@@ -291,57 +310,5 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	
 	func viewController() -> UIViewController {
 		return self
-	}
-}
-
-extension UIViewController {
-	func showAlert(title: String, text: String?, forDuration duration: NSTimeInterval) {
-		let alert = UIAlertController(title: title, message: text, preferredStyle: .Alert)
-		presentViewController(alert, animated: true) {
-			UIView.animateWithDuration(duration, animations: {
-				alert.view.alpha = 0.9999999 // dummy animation for an easy wait
-			}) { (success) in
-				alert.dismissViewControllerAnimated(true, completion: nil)
-			}
-		}
-	}
-}
-
-extension NSDate {
-	func toString() -> String {
-		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateFormat = "dd.MM.yyyy"
-		
-		return dateFormatter.stringFromDate(self)
-	}
-	
-	func toISO8601() -> String {
-		let dateFormatter = NSDateFormatter()
-		let enUSPosixLocale = NSLocale(localeIdentifier: "en_US_POSIX")
-		dateFormatter.locale = enUSPosixLocale
-		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-		
-		return dateFormatter.stringFromDate(self)
-	}
-}
-
-extension UIToolbar {
-	static func doneToolbar(controller: UIViewController, action: Selector) -> UIToolbar {
-		let toolbar = UIToolbar()
-		toolbar.autoresizingMask = .FlexibleHeight
-		toolbar.items = [
-			UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil),
-			UIBarButtonItem(barButtonSystemItem: .Done, target: controller, action: action)
-		]
-		return toolbar
-	}
-}
-
-extension UIDatePicker {
-	static func picker(controller: UIViewController, action: Selector) -> UIDatePicker {
-		let picker = UIDatePicker()
-		picker.datePickerMode = .Date
-		picker.addTarget(controller, action: action, forControlEvents: .ValueChanged)
-		return picker
 	}
 }

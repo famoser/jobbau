@@ -26,24 +26,8 @@ class AvailabilityEditViewController: UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		startDatePicker = UIDatePicker.picker(self, action: #selector(startDatePicked))
-		endDatePicker = UIDatePicker.picker(self, action: #selector(endDatePicked))
-		if let date = startDate {
-			startDatePicker.date = date
-			startDateField.text = date.toString()
-		}
-		if let date = endDate {
-			endDatePicker.date = date
-			endDateField.text = date.toString()
-		}
-		
-		startDateField.inputView = startDatePicker
-		startDateField.inputAccessoryView = UIToolbar.doneToolbar(self, action: #selector(startDateDone))
-		startDateField.valueForKey("textInputTraits")?.setValue(UIColor.clearColor(), forKey: "insertionPointColor")
-		
-		endDateField.inputView = endDatePicker
-		endDateField.inputAccessoryView = UIToolbar.doneToolbar(self, action: #selector(endDateDone))
-		endDateField.valueForKey("textInputTraits")?.setValue(UIColor.clearColor(), forKey: "insertionPointColor")
+		startDateField.makeDateField(donePressed: (self, #selector(startDateDone)), dateChanged: (self, #selector(startDatePicked)), initialDate: startDate)
+		endDateField.makeDateField(donePressed: (self, #selector(endDateDone)), dateChanged: (self, #selector(endDatePicked)), initialDate: endDate)
 	}
 	
 	func movePicker(picker: UIDatePicker) {
@@ -88,12 +72,10 @@ class AvailabilityEditViewController: UITableViewController {
 	
 	func startDatePicked(picker: UIDatePicker) {
 		startDate = picker.date
-		startDateField.text = "Start: \(startDate?.toString() ?? "not set")"
 	}
 	
 	func endDatePicked(picker: UIDatePicker) {
 		endDate = picker.date
-		endDateField.text = "End: \(endDate?.toString() ?? "not set")"
 	}
 	
 	override func viewWillDisappear(animated: Bool) {

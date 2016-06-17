@@ -26,8 +26,8 @@ class AvailabilitySelectViewController: UITableViewController {
 		let startLabel = cell.viewWithTag(10) as! UILabel
 		let endLabel = cell.viewWithTag(11) as! UILabel
 		let availb = EditorViewController.availabilities[indexPath.row]
-		startLabel.text = availb.0.toString()
-		endLabel.text = availb.1.toString()
+		startLabel.text = "Start: \(availb.0.toString())"
+		endLabel.text = "End: \(availb.1.toString())"
 		return cell
 	}
 	

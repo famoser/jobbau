@@ -21,7 +21,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 					presentViewController(navigator, animated: true, completion: nil)
 				}
 			} else {
-				showAlert("Incorrect Password!", text: nil, forDuration: 2)
+				showAlert("Incorrect Password!", text: nil, forDuration: 1)
 			}
 		}
 	}

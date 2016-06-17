@@ -64,6 +64,7 @@
 		95B8853C1D10C8F500AA8AB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8853B1D10C8F500AA8AB9 /* Constants.swift */; };
 		95B8853E1D10CF9A00AA8AB9 /* AvailabilitySelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8853D1D10CF9A00AA8AB9 /* AvailabilitySelectViewController.swift */; };
 		95B885401D10D0B700AA8AB9 /* AvailabilityEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8853F1D10D0B700AA8AB9 /* AvailabilityEditViewController.swift */; };
+		95E1E7571D1431DC00A4DA07 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E1E7561D1431DC00A4DA07 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,7 @@
 		95B8853B1D10C8F500AA8AB9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		95B8853D1D10CF9A00AA8AB9 /* AvailabilitySelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailabilitySelectViewController.swift; sourceTree = "<group>"; };
 		95B8853F1D10D0B700AA8AB9 /* AvailabilityEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailabilityEditViewController.swift; sourceTree = "<group>"; };
+		95E1E7561D1431DC00A4DA07 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				955B543C1D0F2C6C00C4AA43 /* SubmissionHelper.swift */,
+				95E1E7561D1431DC00A4DA07 /* Extensions.swift */,
 				9535D5791D0B856500BD38B5 /* PhotoHelper.swift */,
 				955CACD81D0DE6CF00160260 /* JSONHelper.swift */,
 			);
@@ -493,6 +496,7 @@
 				957D68451D0F4CA4007865D2 /* AFAutoPurgingImageCache.m in Sources */,
 				95B8853A1D10B58400AA8AB9 /* ProfessionSelectViewController.swift in Sources */,
 				957D68431D0F4CA4007865D2 /* AFURLSessionManager.m in Sources */,
+				95E1E7571D1431DC00A4DA07 /* Extensions.swift in Sources */,
 				95B885401D10D0B700AA8AB9 /* AvailabilityEditViewController.swift in Sources */,
 				955CACD91D0DE6CF00160260 /* JSONHelper.swift in Sources */,
 				957D684B1D0F4CA4007865D2 /* UIActivityIndicatorView+AFNetworking.m in Sources */,

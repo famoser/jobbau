@@ -25,7 +25,7 @@ class Professions {
 			}
 		}
 		professions.sortInPlace() { $0.name.lowercaseString < $1.name.lowercaseString }
-		let other = Profession(ID: -1, name: "Other")
+		let other = Profession(ID: -1, name: "Other...")
 		other.trainings = []
 		professions.append(other)
 	}
@@ -41,7 +41,7 @@ class Profession: Equatable {
 	
 	var ID: Int
 	var name: String
-	var trainings: [Training]!
+	var trainings: [Training] = []
 	var selectedTraining: Training?
 	var experienceType = 0
 	
