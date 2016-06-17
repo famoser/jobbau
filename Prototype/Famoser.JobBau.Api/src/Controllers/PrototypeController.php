@@ -89,10 +89,10 @@ class PrototypeController extends BaseController
                 $profInfo->person_id = $person->id;
 
                 $profInfo->experience_type = $professionInfo->experience_type;
-                $profInfo->profession_id = $professionInfo->experience_type;
-                $profInfo->other_profession = $professionInfo->experience_type;
-                $profInfo->training_id = $professionInfo->experience_type;
-                $profInfo->other_training = $professionInfo->experience_type;
+                $profInfo->profession_id = $professionInfo->profession_id;
+                $profInfo->other_profession = $professionInfo->other_profession;
+                $profInfo->training_id = $professionInfo->training_id;
+                $profInfo->other_training = $professionInfo->other_training;
 
                 if (!$helper->saveToDatabase($profInfo)) {
                     return $this->returnApiError(ApiErrorTypes::DatabaseFailure, $response);
@@ -254,7 +254,7 @@ class PrototypeController extends BaseController
 
     public function getUserDirForContent($userGuid)
     {
-        $path = $this->container->get("settings")["file_path"] . "/" . $userGuid;
+        $path = $this->container->get("settings")["file_path"];
         if (!is_dir($path)) {
             mkdir($path);
         }

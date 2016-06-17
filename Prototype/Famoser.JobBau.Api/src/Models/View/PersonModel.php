@@ -95,17 +95,12 @@ class PersonModel extends BaseModel
         if (!$this->person->looking_for_job)
             return "nicht verfügbar (nicht auf jobsuche)";
 
-        $minDate = PHP_INT_MAX;
-        $today = time();
-        foreach ($this->availabilityModels as $item) {
-            if ($item->start_date < $minDate && $item->end_date > $today) {
-                $minDate = $item->start_date;
+        foreach ($this->getAvailabilityModels() as $item) {
+            if ($item->getIsAvailable()) {
+                return "verfügbar seit " . $item->getStartDate();
             }
         }
-        if ($minDate < PHP_INT_MAX) {
-            return "verfügbar ab " . date("d.m.Y", $minDate);
-        }
-        return "nicht verfügbar";
+        return "zurzeit nicht verfügbar";
     }
 
     public function getAge()

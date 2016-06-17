@@ -34,6 +34,14 @@ class AvailabilityModel
         return date("d.m.Y", $this->availability->end_date);
     }
 
+    public function getIsAvailable()
+    {
+        $time = strtotime("today + 4 week");
+        if ($this->availability->start_date < $time && $this->availability->end_date > $time)
+            return true;
+        return false;
+    }
+
     /**
      * @return Availability
      */
