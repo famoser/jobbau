@@ -11,15 +11,15 @@ import UIKit
 class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextViewDelegate, UITextFieldDelegate {
 	
 	@IBOutlet weak var pictureView: UIImageView!
-	@IBOutlet weak var firstNameLabel: UITextField!
-	@IBOutlet weak var lastNameLabel: UITextField!
-	@IBOutlet weak var address1Label: UITextField!
-	@IBOutlet weak var address2Label: UITextField!
-	@IBOutlet weak var zipCodeLabel: UITextField!
-	@IBOutlet weak var cityLabel: UITextField!
-	@IBOutlet weak var countryLabel: UITextField!
-	@IBOutlet weak var emailLabel: UITextField!
-	@IBOutlet weak var phoneLabel: UITextField!
+	@IBOutlet weak var firstNameField: UITextField!
+	@IBOutlet weak var lastNameField: UITextField!
+	@IBOutlet weak var address1Field: UITextField!
+	@IBOutlet weak var address2Field: UITextField!
+	@IBOutlet weak var zipCodeField: UITextField!
+	@IBOutlet weak var cityField: UITextField!
+	@IBOutlet weak var countryField: UITextField!
+	@IBOutlet weak var emailField: UITextField!
+	@IBOutlet weak var phoneField: UITextField!
 	@IBOutlet weak var skillsLabel: UILabel!
 	@IBOutlet weak var professionsLabel: UILabel!
 	@IBOutlet weak var availabilitiesLabel: UILabel!
@@ -94,20 +94,20 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		textFields = [
-			firstNameLabel,
-			lastNameLabel,
-			address1Label,
-			address2Label,
-			zipCodeLabel,
-			cityLabel,
-			countryLabel,
-			emailLabel,
-			phoneLabel,
+			firstNameField,
+			lastNameField,
+			address1Field,
+			address2Field,
+			zipCodeField,
+			cityField,
+			countryField,
+			emailField,
+			phoneField,
 			birthdayField
 		]
 		
-		zipCodeLabel.inputAccessoryView = UIToolbar.doneToolbar(self, action: #selector(zipCodeDone))
-		phoneLabel.inputAccessoryView = UIToolbar.doneToolbar(self, action: #selector(phoneNumberDone))
+		zipCodeField.inputAccessoryView = UIToolbar.doneToolbar(self, action: #selector(zipCodeDone))
+		phoneField.inputAccessoryView = UIToolbar.doneToolbar(self, action: #selector(phoneNumberDone))
 		
 		birthdayField.inputView = UIDatePicker.picker(self, action: #selector(birthdayPicked))
 		birthdayField.inputAccessoryView = UIToolbar.doneToolbar(self, action: #selector(birthdayDone))
@@ -134,19 +134,19 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 			guard let pic = photo else {
 				throw Errors.MissingText(labelName: "Picture")
 			}
-			let firstName = try collectTextFromField(firstNameLabel)
-			let lastName = try collectTextFromField(lastNameLabel)
-			let address1 = try collectTextFromField(address1Label)
-			let zipCode = try collectTextFromField(zipCodeLabel)
-			let city = try collectTextFromField(cityLabel)
-			let country = try collectTextFromField(countryLabel)
-			let email = try collectTextFromField(emailLabel)
-			let phone = try collectTextFromField(phoneLabel)
+			let firstName = try collectTextFromField(firstNameField)
+			let lastName = try collectTextFromField(lastNameField)
+			let address1 = try collectTextFromField(address1Field)
+			let zipCode = try collectTextFromField(zipCodeField)
+			let city = try collectTextFromField(cityField)
+			let country = try collectTextFromField(countryField)
+			let email = try collectTextFromField(emailField)
+			let phone = try collectTextFromField(phoneField)
 			guard let bday = birthday else {
 				throw Errors.MissingText(labelName: "Birthday")
 			}
 			let date: String = bday.toISO8601()
-			let address2 = address2Label.text
+			let address2 = address2Field.text
 			let comments = commentsView.text
 			
 			let person: [String: AnyObject] = [
@@ -255,11 +255,11 @@ class EditorViewController: UITableViewController, PhotoHelperDelegate, UITextVi
 	// text field delegate methods
 	
 	func zipCodeDone() {
-		textFieldShouldReturn(zipCodeLabel)
+		textFieldShouldReturn(zipCodeField)
 	}
 	
 	func phoneNumberDone() {
-		textFieldShouldReturn(phoneLabel)
+		textFieldShouldReturn(phoneField)
 	}
 	
 	func textFieldShouldReturn(textField: UITextField) -> Bool {
