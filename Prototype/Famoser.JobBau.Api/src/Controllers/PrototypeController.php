@@ -252,7 +252,7 @@ class PrototypeController extends BaseController
         return $this->renderTemplate($response, "backend/entry", $args);
     }
 
-    private function getUserDirForContent($userGuid)
+    public function getUserDirForContent($userGuid)
     {
         $path = $this->container->get("settings")["file_path"] . "/" . $userGuid;
         if (!is_dir($path)) {
