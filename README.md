@@ -1,4 +1,4 @@
 jobbau
 ======
 
-this application could serve as a tool to look for a job in an efficiant and easy way, for both the employee and the employer.
+proof of concept of an application to help look for a job, saving both the employee and the employer time.
